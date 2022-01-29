@@ -8,11 +8,24 @@
 import Foundation
 
 struct CountryItem: Decodable {
+    // MARK: - Properties
+    
     let name: String
     let region: String
     let flag: String
     let capital: [String]
     let area: Int
+    
+    // MARK: - Initializing
+    init(name: String, region: String, flag: String, capital: [String], area: Int) {
+        self.name = name
+        self.region = region
+        self.flag = flag
+        self.capital = capital
+        self.area = area
+    }
+    
+    // MARK: - Decoding
     
     enum RootKey: String, CodingKey {
         case name
