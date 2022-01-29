@@ -14,7 +14,7 @@ let package = Package(
             targets: ["Repository"]),
     ],
     dependencies: [
-        
+        .package(name: "Core", path: "../Core"),
     ],
     targets: [
         .target(
