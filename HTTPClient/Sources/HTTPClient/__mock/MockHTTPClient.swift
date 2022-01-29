@@ -12,11 +12,11 @@ public final class MockHTTPClient: HTTPClient {
     
     public init() { }
     
-    public var resultProvider: (Data, HTTPURLResponse)?
+    public var resultProvider: (Data?, HTTPURLResponse?, Error?)?
     
-    public func request(_ request: URLRequest, completion: @escaping (Data, HTTPURLResponse) -> Void) {
+    public func request(_ request: URLRequest, completion: @escaping (Data?, URLResponse?, Error?) -> Void) {
         if let provider = resultProvider {
-            completion(provider.0, provider.1)
+            completion(provider.0, provider.1, provider.2)
         }
         
         fatalError("Not prepare result provider for mock request")
