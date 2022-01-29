@@ -18,7 +18,7 @@ public struct Country: Equatable {
     
     
     // MARK: - Initialize
-    internal init(id: String, name: String, flag: String, region: String, capital: String) {
+    public init(id: String, name: String, flag: String, region: String, capital: String) {
         self.id = id
         self.name = name
         self.flag = flag
