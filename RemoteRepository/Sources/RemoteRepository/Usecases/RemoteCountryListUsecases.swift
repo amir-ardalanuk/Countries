@@ -16,7 +16,7 @@ public class RemoteCountryListUsecases: CountryUsecase {
     }
     
     
-    public func fetchCountryList(completion: (Result<[Country], CountryUsecaseError>) -> ()) {
+    public func fetchCountryList(completion: @escaping (Result<[Country], CountryUsecaseError>) -> ()) {
         guard let endpointUrl = URL(string: "https://restcountries.com/v3.1/all") else {
             fatalError("URL is not correct")
         }
@@ -38,12 +38,12 @@ public class RemoteCountryListUsecases: CountryUsecase {
 private class CountryItemsMapper {
     static func map(data: Data?, response: URLResponse?) throws -> [Country] {
         guard let httpResponse = response as? HTTPURLResponse, let data = data else {
-            throw CountryUsecaseError.invalidData
+            throw CountryUsecaseError.invalidData(nil)
         }
         
         guard httpResponse.statusCode == 200 else {
             //FIXME: make bettter error description
-            throw CountryUsecaseError.invalidData
+            throw CountryUsecaseError.invalidData(nil)
         }
         
         let countryItems = try JSONDecoder().decode([CountryItem].self, from: data)

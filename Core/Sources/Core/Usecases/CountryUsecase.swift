@@ -16,5 +16,5 @@ public protocol CountryUsecase {
     
     typealias CountryListCompletion = ((Result<[Country], CountryUsecaseError>) -> ())
     
-    func fetchCountryList(completion: CountryListCompletion)
+    func fetchCountryList(completion: @escaping CountryListCompletion)
 }

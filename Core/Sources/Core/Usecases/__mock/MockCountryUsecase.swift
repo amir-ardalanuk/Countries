@@ -14,7 +14,7 @@ public final class MockCountryListUsecases: CountryUsecase {
     
     public var resultProvider: (() -> Result<[Country], CountryUsecaseError>)?
     
-    public func fetchCountryList(completion: CountryListCompletion) {
+    public func fetchCountryList(completion: @escaping CountryListCompletion) {
         if let result = resultProvider?() {
             completion(result)
         }
