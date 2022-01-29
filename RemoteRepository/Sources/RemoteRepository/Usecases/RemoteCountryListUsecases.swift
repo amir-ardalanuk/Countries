@@ -22,7 +22,38 @@ public class RemoteCountryListUsecases: CountryUsecase {
         }
         let request = URLRequest(url: endpointUrl)
         self.client.request(request) { data, response, error in
-            
+            if let error = error {
+                completion(.failure(.networkError(error)))
+            } else {
+                do {
+                    completion(.success(try CountryItemsMapper.map(data: data, response: response)))
+                } catch {
+                    completion(.failure(.invalidData(error)))
+                }
+            }
+        }
+    }
+}
+
+private class CountryItemsMapper {
+    static func map(data: Data?, response: URLResponse?) throws -> [Country] {
+        guard let httpResponse = response as? HTTPURLResponse, let data = data else {
+            throw CountryUsecaseError.invalidData
+        }
+        
+        guard httpResponse.statusCode == 200 else {
+            //FIXME: make bettter error description
+            throw CountryUsecaseError.invalidData
+        }
+        
+        let countryItems = try JSONDecoder().decode([CountryItem].self, from: data)
+        return countryItems.map { item -> Country in
+            Country.init(
+                id: item.name,
+                name: item.name,
+                flag: item.flag,
+                region: item.region,
+                capital: item.capital.first ?? "-")
         }
     }
 }
