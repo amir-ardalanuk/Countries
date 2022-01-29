@@ -14,7 +14,7 @@ public enum CountryUsecaseError: Error {
 
 public protocol CountryUsecase {
     
-    typealias CountryListCompletion = ((Void) -> Result<Country, CountryUsecaseError>)
+    typealias CountryListCompletion = ((Result<[Country], CountryUsecaseError>) -> ())
     
     func fetchCountryList(completion: CountryListCompletion)
 }
