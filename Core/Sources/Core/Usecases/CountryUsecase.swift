@@ -8,7 +8,7 @@
 import Foundation
 
 public enum CountryUsecaseError: Error {
-    case invalidData
+    case invalidData(Error?)
     case networkError(Error)
 }
 
