@@ -12,7 +12,16 @@ protocol CountryCellViewModel {
     var country: Country { get }
 }
 
+extension CountryCellViewModel {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.country.id == rhs.country.id
+    }
+}
+
 final class DefaultCountryCellViewModel: CountryCellViewModel {
+    var id: String {
+        country.id
+    }
     var country: Country
     
     init(country: Country) {

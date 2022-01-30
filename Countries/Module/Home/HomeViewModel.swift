@@ -18,8 +18,9 @@ protocol HomeViewModel {
 }
 
 //MARK: - Action
-enum HomeAction: Int, Equatable {
+enum HomeAction: Equatable {
     case openCountryList
+    case updateList([Country])
 }
 
 //MARK: - State
@@ -51,10 +52,12 @@ class DefaultHomeViewModel: HomeViewModel {
         switch action {
         case .openCountryList:
             countryListRouter.openCountryList { [weak self] updatedList in
-                self?.state.value = .init(
-                    selectedCountry: updatedList.map { DefaultCountryCellViewModel(country: $0) }
-                )
+                self?.send(action: .updateList(updatedList))
             }
+        case let .updateList(updatedList):
+            state.value = .init(
+                selectedCountry: updatedList.map { DefaultCountryCellViewModel(country: $0) }
+            )
         }
     }
 }
