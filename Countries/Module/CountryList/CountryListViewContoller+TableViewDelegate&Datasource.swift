@@ -10,7 +10,11 @@ import UIKit
 
 extension CountryListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MarkableCountryCell.reuseableName) as? MarkableCountryCell else {
+            return UITableViewCell()
+        }
+        cell.config(viewModel.state.value.countries[indexPath.row])
+        return cell
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -18,6 +22,6 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.state.value.countries.count
     }
 }
