@@ -15,6 +15,13 @@
 		8B4B27D827A67E6F00C06EB8 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4B27D727A67E6F00C06EB8 /* PushTransition.swift */; };
 		8B4B27DB27A6863300C06EB8 /* HomeRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4B27DA27A6863300C06EB8 /* HomeRoute.swift */; };
 		8B4B27DD27A686E200C06EB8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4B27DC27A686E200C06EB8 /* HomeViewModel.swift */; };
+		8B4B27E027A68A3300C06EB8 /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4B27DF27A68A3300C06EB8 /* CountryListViewController.swift */; };
+		8B4B27E227A68A5B00C06EB8 /* CountryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4B27E127A68A5B00C06EB8 /* CountryListViewModel.swift */; };
+		8B4B27E427A68ABF00C06EB8 /* CountryListRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B4B27E327A68ABF00C06EB8 /* CountryListRoute.swift */; };
+		8B6DCDFC27A6A59300413FBA /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6DCDFB27A6A59300413FBA /* Core */; };
+		8B6DCDFE27A6A59900413FBA /* HTTPClient in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6DCDFD27A6A59900413FBA /* HTTPClient */; };
+		8B6DCE0027A6A59C00413FBA /* Repository in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6DCDFF27A6A59C00413FBA /* Repository */; };
+		8B6DCE0227A6A59F00413FBA /* RemoteRepository in Frameworks */ = {isa = PBXBuildFile; productRef = 8B6DCE0127A6A59F00413FBA /* RemoteRepository */; };
 		8BCB97E327A533E700D1346D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB97E227A533E700D1346D /* AppDelegate.swift */; };
 		8BCB97E527A533E700D1346D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB97E427A533E700D1346D /* SceneDelegate.swift */; };
 		8BCB97EC27A533E800D1346D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCB97EB27A533E800D1346D /* Assets.xcassets */; };
@@ -50,6 +57,9 @@
 		8B4B27D727A67E6F00C06EB8 /* PushTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
 		8B4B27DA27A6863300C06EB8 /* HomeRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRoute.swift; sourceTree = "<group>"; };
 		8B4B27DC27A686E200C06EB8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8B4B27DF27A68A3300C06EB8 /* CountryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
+		8B4B27E127A68A5B00C06EB8 /* CountryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewModel.swift; sourceTree = "<group>"; };
+		8B4B27E327A68ABF00C06EB8 /* CountryListRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListRoute.swift; sourceTree = "<group>"; };
 		8BCB97DF27A533E700D1346D /* Countries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCB97E227A533E700D1346D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BCB97E427A533E700D1346D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +78,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B6DCE0227A6A59F00413FBA /* RemoteRepository in Frameworks */,
+				8B6DCDFC27A6A59300413FBA /* Core in Frameworks */,
+				8B6DCDFE27A6A59900413FBA /* HTTPClient in Frameworks */,
+				8B6DCE0027A6A59C00413FBA /* Repository in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,8 +171,18 @@
 		8B4B27DE27A6894100C06EB8 /* CountryList */ = {
 			isa = PBXGroup;
 			children = (
+				8B4B27DF27A68A3300C06EB8 /* CountryListViewController.swift */,
+				8B4B27E327A68ABF00C06EB8 /* CountryListRoute.swift */,
+				8B4B27E127A68A5B00C06EB8 /* CountryListViewModel.swift */,
 			);
 			path = CountryList;
+			sourceTree = "<group>";
+		};
+		8B6DCDFA27A6A59300413FBA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		8BCB97D627A533E700D1346D = {
@@ -168,6 +192,7 @@
 				8BCB97F827A533E900D1346D /* CountriesTests */,
 				8BCB980227A533E900D1346D /* CountriesUITests */,
 				8BCB97E027A533E700D1346D /* Products */,
+				8B6DCDFA27A6A59300413FBA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -225,6 +250,12 @@
 			dependencies = (
 			);
 			name = Countries;
+			packageProductDependencies = (
+				8B6DCDFB27A6A59300413FBA /* Core */,
+				8B6DCDFD27A6A59900413FBA /* HTTPClient */,
+				8B6DCDFF27A6A59C00413FBA /* Repository */,
+				8B6DCE0127A6A59F00413FBA /* RemoteRepository */,
+			);
 			productName = Countries;
 			productReference = 8BCB97DF27A533E700D1346D /* Countries.app */;
 			productType = "com.apple.product-type.application";
@@ -341,10 +372,13 @@
 			files = (
 				8B4B27D327A67D8700C06EB8 /* EmptyTransition.swift in Sources */,
 				8B4B27DD27A686E200C06EB8 /* HomeViewModel.swift in Sources */,
+				8B4B27E427A68ABF00C06EB8 /* CountryListRoute.swift in Sources */,
 				8B4B27CD27A67B7600C06EB8 /* Transition.swift in Sources */,
 				8B4B27D827A67E6F00C06EB8 /* PushTransition.swift in Sources */,
 				8B4B27CB27A67B1A00C06EB8 /* Router.swift in Sources */,
 				8BCB97E327A533E700D1346D /* AppDelegate.swift in Sources */,
+				8B4B27E027A68A3300C06EB8 /* CountryListViewController.swift in Sources */,
+				8B4B27E227A68A5B00C06EB8 /* CountryListViewModel.swift in Sources */,
 				8B4B27BF27A5D18F00C06EB8 /* HomeViewController.swift in Sources */,
 				8B4B27D027A67BCE00C06EB8 /* DefaultRouter.swift in Sources */,
 				8B4B27DB27A6863300C06EB8 /* HomeRoute.swift in Sources */,
@@ -519,7 +553,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Countries/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -545,7 +579,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = Countries/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -676,6 +710,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B6DCDFB27A6A59300413FBA /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		8B6DCDFD27A6A59900413FBA /* HTTPClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HTTPClient;
+		};
+		8B6DCDFF27A6A59C00413FBA /* Repository */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Repository;
+		};
+		8B6DCE0127A6A59F00413FBA /* RemoteRepository */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RemoteRepository;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8BCB97D727A533E700D1346D /* Project object */;
 }
