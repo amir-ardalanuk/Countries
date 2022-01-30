@@ -22,6 +22,8 @@ enum CountryListAction: Equatable {
     case fetchCountry
     case updateCountryList([Country])
     case toggleSelected(Country)
+    case search(String)
+    case cancelSearch
 }
 
 struct CountryListState {
@@ -38,6 +40,10 @@ extension CountryListState {
     func update(selectedCountries: [Country]) -> Self {
         return .init(selectedCountries: selectedCountries, countries: self.countries, isLoading: self.isLoading)
     }
+    
+    func update(viewModels: [MarkableCountryViewModel]) -> Self {
+        return .init(selectedCountries: self.selectedCountries, countries: viewModels, isLoading: self.isLoading)
+    }
 }
 
 class DefaultCountryListViewModel: CountryListViewModel {
@@ -46,9 +52,10 @@ class DefaultCountryListViewModel: CountryListViewModel {
     var router: CountryListViewModel.Router
     var state: CurrentValueSubject<CountryListState, Never>
     var completeEditing: (([Country]) -> Void)?
+    private var countriesCach = [Country]()
     
     //MARK: - Initialize
-
+    
     init(router: CountryListViewModel.Router, selectedCountries: [Country] = []) {
         self.state = .init(.init(selectedCountries: selectedCountries, countries: [], isLoading: false))
         self.router = router
@@ -71,12 +78,28 @@ class DefaultCountryListViewModel: CountryListViewModel {
             self.state = .init(
                 .init(
                     selectedCountries: currentState.selectedCountries,
-                    countries: viewModels, isLoading: false))
+                    countries: viewModels,
+                    isLoading: false
+                )
+            )
         case .toggleSelected(let country):
             updateSelectedList(withToggle: country)
+        case let .search(text):
+            search(text)
+        case .cancelSearch:
+            let viewModels = generateViewModels(countriesCach)
+            state.value = state.value.update(viewModels: viewModels)
         }
     }
     
+    //MARK: - Searching
+    func search(_ text: String) {
+        let filterdCountries = countriesCach.filter { $0.name.contains(text) }
+        let viewModels = generateViewModels(filterdCountries)
+        state.value = state.value.update(viewModels: viewModels)
+    }
+    
+    //MARK: - Generate ViewModels
     func generateViewModels(_ list: [Country]) -> [MarkableCountryViewModel] {
         let currentState = state.value
         let selectedIds = currentState.selectedCountries.map { $0.id}
@@ -106,6 +129,7 @@ class DefaultCountryListViewModel: CountryListViewModel {
     
     private func fetchCountryList() {
         //FIXME: call api
+        self.send(action: .updateCountryList([.stub(), .stub()]))
     }
     
 }

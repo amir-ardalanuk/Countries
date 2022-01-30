@@ -12,6 +12,11 @@ class CountryListViewController: UIViewController {
     var viewModel: CountryListViewModel
     
     // MARK: - View's
+    lazy var searchBar: UISearchBar = {[unowned self] in
+        let searchBar = UISearchBar()
+        searchBar.delegate = self
+        return searchBar
+    }
     lazy var tableView: UITableView = { [unowned self] in
         let view = UITableView(frame: self.view.frame)
         view.delegate = self
@@ -49,5 +54,16 @@ class CountryListViewController: UIViewController {
     //MARK: - Selectors
     @objc private func refreshDidChange(_ sender: Any) {
         self.viewModel.send(action: .fetchCountry)
+    }
+}
+
+//MARK: - Searchbar Delegate
+extension CountryListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
     }
 }
