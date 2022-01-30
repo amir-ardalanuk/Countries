@@ -10,11 +10,9 @@ import Combine
 import Core
 
 protocol HomeViewModel {
-    typealias Router = HomeRoute
-    
     func send(action: HomeAction)
     var state: CurrentValueSubject<HomeState, Never> { get }
-    var router: Router { get }
+    var countryListRouter: CountryListRouter { get }
 }
 
 enum HomeAction: Int, Equatable {
@@ -26,12 +24,12 @@ struct HomeState {
 }
 
 class DefaultHomeViewModel: HomeViewModel {
-    var router: HomeViewModel.Router
+    var countryListRouter: CountryListRouter
     var state: CurrentValueSubject<HomeState, Never> = .init(.init())
     
 
-    init(router: HomeViewModel.Router) {
-        self.router = router
+    init(countryListRouter: CountryListRouter) {
+        self.countryListRouter = countryListRouter
     }
     
     required init?(coder: NSCoder) {
@@ -39,7 +37,9 @@ class DefaultHomeViewModel: HomeViewModel {
     }
     
     func send(action: HomeAction) {
-        
+        self.countryListRouter.openCountryList { updatedList in
+            
+        }
     }
 }
 

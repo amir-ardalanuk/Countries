@@ -7,19 +7,20 @@
 
 import Foundation
 import UIKit
+import Core
 
 protocol HomeRoute {
+    typealias Result = () -> [Country]
     func makeHome() -> UIViewController
 }
 
 extension HomeRoute where Self: Router {
     func makeHome() -> UIViewController {
-        let router = DefaultRouter(rootTransition: EmptyTransition())
-        let viewModel = DefaultHomeViewModel(router: router)
+        let router = DefaultRouter(rootTransition: PushTransition())
+        let viewModel = DefaultHomeViewModel(countryListRouter: router)
         let viewController = HomeViewController(viewModel: viewModel)
-        router.root = viewController
-
         let navigation = UINavigationController(rootViewController: viewController)
+        router.root = viewController
         return navigation
     }
 }
