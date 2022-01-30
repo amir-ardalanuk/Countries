@@ -11,6 +11,15 @@ class CountryListViewController: UIViewController {
     //MARK: - Properties
     var viewModel: CountryListViewModel
     
+    // MARK: - View's
+    lazy var tableView: UITableView = { [unowned self] in
+        let view = UITableView(frame: self.view.frame)
+        view.delegate = self
+        view.dataSource = self
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // MARK: - Init
     init(viewModel: CountryListViewModel) {
         self.viewModel = viewModel
