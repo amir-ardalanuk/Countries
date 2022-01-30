@@ -40,6 +40,13 @@ class CountryListViewController: UIViewController {
         return controller
     }()
     
+    lazy var doneBarButtonItem: UIBarButtonItem = {[unowned self] in
+        let doneAction = UIBarButtonItem(systemItem: .done, primaryAction: nil, menu: nil)
+        doneAction.target = self
+        doneAction.action = #selector(didTapOnDone(_:))
+        return doneAction
+    }()
+    
     // MARK: - Init
     init(viewModel: CountryListViewModel) {
         self.viewModel = viewModel
@@ -58,11 +65,16 @@ class CountryListViewController: UIViewController {
         setupViews()
         setupConstraint()
         setupObserver()
+        self.navigationItem.rightBarButtonItem = doneBarButtonItem
     }
     
     //MARK: - Selectors
     @objc private func refreshDidChange(_ sender: Any) {
         self.viewModel.send(action: .fetchCountry)
+    }
+    
+    @objc private func didTapOnDone(_ sender: Any) {
+        self.viewModel.send(action: .doneChoosing)
     }
     
     //MARK: - setup Views

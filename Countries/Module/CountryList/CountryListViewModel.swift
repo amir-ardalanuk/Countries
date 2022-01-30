@@ -10,7 +10,7 @@ import Combine
 import Core
 
 protocol CountryListViewModel {
-    typealias Router = CountryListRouter
+    typealias Router = CountryListRouter & Closable
     
     func send(action: CountryListAction)
     var state: CurrentValueSubject<CountryListState, Never> { get }
@@ -24,6 +24,7 @@ enum CountryListAction: Equatable {
     case toggleSelected(Country)
     case search(String)
     case cancelSearch
+    case doneChoosing
 }
 
 struct CountryListState {
@@ -89,6 +90,9 @@ class DefaultCountryListViewModel: CountryListViewModel {
         case .cancelSearch:
             let viewModels = generateViewModels(countriesCach)
             state.value = state.value.update(viewModels: viewModels)
+        case .doneChoosing:
+            completeEditing?(state.value.selectedCountries)
+            router.close()
         }
     }
     
