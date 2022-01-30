@@ -16,6 +16,10 @@ class CountryListViewController: UIViewController {
         let view = UITableView(frame: self.view.frame)
         view.delegate = self
         view.dataSource = self
+        view.register(
+            .init(nibName: MarkableCountryCell.reuseableName, bundle: nil),
+            forCellReuseIdentifier: MarkableCountryCell.reuseableName
+        )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
