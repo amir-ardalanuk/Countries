@@ -21,7 +21,15 @@ class CountryListViewController: UIViewController {
             forCellReuseIdentifier: MarkableCountryCell.reuseableName
         )
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.refreshControl = self.refresher
+        
         return view
+    }()
+    
+    lazy var refresher: UIRefreshControl =  { [unowned self] in
+        var controller = UIRefreshControl()
+        controller.addTarget(self, action: #selector(refreshDidChange(_:)), for: .valueChanged)
+        return controller
     }()
     
     // MARK: - Init
@@ -32,5 +40,14 @@ class CountryListViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    //MARK: - Selectors
+    @objc private func refreshDidChange(_ sender: Any) {
+        self.viewModel.send(action: .fetchCountry)
     }
 }
