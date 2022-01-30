@@ -8,8 +8,10 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
-    init() {
+    var viewModel: HomeViewModel
+    
+    init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel  
         super.init(nibName: nil, bundle: nil)
     }
     
