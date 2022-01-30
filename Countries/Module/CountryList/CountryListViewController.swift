@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class CountryListViewController: UIViewController {
     //MARK: - Properties
     var viewModel: CountryListViewModel
-    
+    private var cancellable = Set<AnyCancellable>()
     // MARK: - View's
     lazy var searchBar: UISearchBar = { [unowned self] in
         let searchBar = UISearchBar()
@@ -43,6 +44,7 @@ class CountryListViewController: UIViewController {
     init(viewModel: CountryListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        title = "Choose Country"
     }
     
     required init?(coder: NSCoder) {
@@ -55,7 +57,7 @@ class CountryListViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraint()
-        //setupObserver()
+        setupObserver()
     }
     
     //MARK: - Selectors
@@ -89,15 +91,33 @@ class CountryListViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(tableViewConstraint)
     }
+    
+    //MARK: - setup Observer
+    
+    func setupObserver() {
+        self.viewModel.state
+            .map {
+                !$0.isLoading
+            }.sink { [weak self] isHidden in
+                self?.refresher.endRefreshing()
+            }
+            .store(in: &cancellable)
+        
+        self.viewModel.state
+            .sink { [weak self] homeState in
+            //FIXME: it's better to use diffable datasource and batchUpdate to reload only cells have been changed.
+            self?.tableView.reloadData()
+        }.store(in: &cancellable)
+    }
 }
 
 //MARK: - Searchbar Delegate
 extension CountryListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+        self.viewModel.send(action: .search(searchText))
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
+        self.viewModel.send(action: .cancelSearch)
     }
 }
