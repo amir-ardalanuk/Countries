@@ -29,6 +29,7 @@
 		8B6DCE0D27A6CDDB00413FBA /* CountryListViewContoller+TableViewDelegate&Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DCE0C27A6CDDB00413FBA /* CountryListViewContoller+TableViewDelegate&Datasource.swift */; };
 		8B6DCE1127A6CEC500413FBA /* MarkableCountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DCE0F27A6CEC500413FBA /* MarkableCountryCell.swift */; };
 		8B6DCE1227A6CEC500413FBA /* MarkableCountryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B6DCE1027A6CEC500413FBA /* MarkableCountryCell.xib */; };
+		8B6DCE1427A6D21600413FBA /* MarkableCountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DCE1327A6D21600413FBA /* MarkableCountryViewModel.swift */; };
 		8BCB97E327A533E700D1346D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB97E227A533E700D1346D /* AppDelegate.swift */; };
 		8BCB97E527A533E700D1346D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB97E427A533E700D1346D /* SceneDelegate.swift */; };
 		8BCB97EC27A533E800D1346D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BCB97EB27A533E800D1346D /* Assets.xcassets */; };
@@ -74,6 +75,7 @@
 		8B6DCE0C27A6CDDB00413FBA /* CountryListViewContoller+TableViewDelegate&Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CountryListViewContoller+TableViewDelegate&Datasource.swift"; sourceTree = "<group>"; };
 		8B6DCE0F27A6CEC500413FBA /* MarkableCountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkableCountryCell.swift; sourceTree = "<group>"; };
 		8B6DCE1027A6CEC500413FBA /* MarkableCountryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkableCountryCell.xib; sourceTree = "<group>"; };
+		8B6DCE1327A6D21600413FBA /* MarkableCountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkableCountryViewModel.swift; sourceTree = "<group>"; };
 		8BCB97DF27A533E700D1346D /* Countries.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Countries.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCB97E227A533E700D1346D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8BCB97E427A533E700D1346D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				8B6DCE0F27A6CEC500413FBA /* MarkableCountryCell.swift */,
 				8B6DCE1027A6CEC500413FBA /* MarkableCountryCell.xib */,
+				8B6DCE1327A6D21600413FBA /* MarkableCountryViewModel.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				8B6DCE0D27A6CDDB00413FBA /* CountryListViewContoller+TableViewDelegate&Datasource.swift in Sources */,
 				8B6DCE0627A6B77600413FBA /* CountryCell.swift in Sources */,
 				8BCB97E327A533E700D1346D /* AppDelegate.swift in Sources */,
+				8B6DCE1427A6D21600413FBA /* MarkableCountryViewModel.swift in Sources */,
 				8B4B27E027A68A3300C06EB8 /* CountryListViewController.swift in Sources */,
 				8B4B27E227A68A5B00C06EB8 /* CountryListViewModel.swift in Sources */,
 				8B4B27BF27A5D18F00C06EB8 /* HomeViewController.swift in Sources */,

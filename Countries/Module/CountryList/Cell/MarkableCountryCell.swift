@@ -15,7 +15,11 @@ class MarkableCountryCell: UITableViewCell {
     @IBOutlet weak var checkmarkImageView: UIImageView!
     
     //MARK: - Properties
-    
+    var viewModel: MarkableCountryViewModel? {
+        didSet {
+            setupViewData()
+        }
+    }
     
     //MARK: - Lifecycle
     override func awakeFromNib() {
@@ -25,10 +29,23 @@ class MarkableCountryCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        viewModel?.didSelect?()
         // Configure the view for the selected state
     }
     
+    //MARK: - Config ViewModel
+    func config(_ viewModel: MarkableCountryViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    //MARK: - setup Views Data
+    func setupViewData() {
+        self.viewModel.flatMap {
+            self.nameLabel.text = $0.country.name
+            self.flagLabel.text = $0.country.flag
+            self.checkmarkImageView.image = $0.isSelected ? #imageLiteral(resourceName: "ic_circle_mark") : #imageLiteral(resourceName: "ic_circle")
+        }
+    }
 }
 
 extension MarkableCountryCell {
