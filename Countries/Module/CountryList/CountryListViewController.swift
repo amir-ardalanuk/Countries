@@ -12,11 +12,13 @@ class CountryListViewController: UIViewController {
     var viewModel: CountryListViewModel
     
     // MARK: - View's
-    lazy var searchBar: UISearchBar = {[unowned self] in
+    lazy var searchBar: UISearchBar = { [unowned self] in
         let searchBar = UISearchBar()
         searchBar.delegate = self
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
-    }
+    }()
+    
     lazy var tableView: UITableView = { [unowned self] in
         let view = UITableView(frame: self.view.frame)
         view.delegate = self
@@ -47,13 +49,45 @@ class CountryListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupViews()
+        setupConstraint()
+        //setupObserver()
     }
     
     //MARK: - Selectors
     @objc private func refreshDidChange(_ sender: Any) {
         self.viewModel.send(action: .fetchCountry)
+    }
+    
+    //MARK: - setup Views
+    
+    func setupViews() {
+        view.backgroundColor = .white
+        [tableView, searchBar]
+            .forEach(view.addSubview(_:))
+    }
+    
+    //MARK: - setup Constraint
+    
+    func setupConstraint() {
+        let searchBarConstraint = [
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            searchBar.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            searchBar.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor)
+        ]
+        NSLayoutConstraint.activate(searchBarConstraint)
+        
+        let tableViewConstraint = [
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+        ]
+        NSLayoutConstraint.activate(tableViewConstraint)
     }
 }
 
