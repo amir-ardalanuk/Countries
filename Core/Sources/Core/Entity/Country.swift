@@ -25,6 +25,4 @@ public struct Country: Equatable {
         self.region = region
         self.capital = capital
     }
-    
-    
 }
