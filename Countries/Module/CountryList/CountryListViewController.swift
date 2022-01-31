@@ -65,7 +65,8 @@ class CountryListViewController: UIViewController {
         setupViews()
         setupConstraint()
         setupObserver()
-        self.navigationItem.rightBarButtonItem = doneBarButtonItem
+        navigationItem.rightBarButtonItem = doneBarButtonItem
+        viewModel.send(action: .fetchCountry)
     }
     
     //MARK: - Selectors
@@ -109,9 +110,14 @@ class CountryListViewController: UIViewController {
     func setupObserver() {
         self.viewModel.state
             .map {
-                !$0.isLoading
-            }.sink { [weak self] isHidden in
-                self?.refresher.endRefreshing()
+                $0.isLoading
+            }.sink { [weak self] isLoading in
+                if isLoading {
+                    self?.refresher.beginRefreshing()
+                } else {
+                    self?.refresher.endRefreshing()
+                }
+                
             }
             .store(in: &cancellable)
         
@@ -126,7 +132,12 @@ class CountryListViewController: UIViewController {
 //MARK: - Searchbar Delegate
 extension CountryListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        self.viewModel.send(action: .search(searchText))
+        if searchText.isEmpty {
+            self.viewModel.send(action: .cancelSearch)
+        } else {
+            self.viewModel.send(action: .search(searchText))
+        }
+        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

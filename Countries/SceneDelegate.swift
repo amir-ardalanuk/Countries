@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import Repository
+import RemoteRepository
+import HTTPClient
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -19,7 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let wc = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: wc)
         let router = DefaultRouter(rootTransition: EmptyTransition())
-        window.rootViewController = router.makeHome()
+        let httpClient = DefaultHTTPClient.init(urlSession: URLSession.shared)
+        let remoteRepository = RemoteCountryListUsecases(client: httpClient)
+        let countryUsecases = RepositoryCountryUsecase.init(remoteUsecases: remoteRepository)
+        window.rootViewController = router.makeHome(countryUsecases: countryUsecases)
         window.makeKeyAndVisible()
         self.window = window
     }

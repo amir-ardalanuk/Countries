@@ -15,6 +15,7 @@ protocol HomeViewModel {
     var state: CurrentValueSubject<HomeState, Never> { get }
     var currentState: HomeState { get }
     var countryListRouter: CountryListRouter { get }
+    var countryUsecase: CountryUsecase { get }
 }
 
 //MARK: - Action
@@ -34,14 +35,14 @@ class DefaultHomeViewModel: HomeViewModel {
     var currentState: HomeState {
         return state.value
     }
-    
+    var countryUsecase: CountryUsecase
     var countryListRouter: CountryListRouter
     var state: CurrentValueSubject<HomeState, Never> = .init(.init(selectedCountry: []))
     
-
-    init(countryListRouter: CountryListRouter) {
+    
+    init(countryListRouter: CountryListRouter, countryUsecase: CountryUsecase) {
         self.countryListRouter = countryListRouter
-        
+        self.countryUsecase = countryUsecase
     }
     
     required init?(coder: NSCoder) {
@@ -51,9 +52,16 @@ class DefaultHomeViewModel: HomeViewModel {
     func send(action: HomeAction) {
         switch action {
         case .openCountryList:
-            countryListRouter.openCountryList { [weak self] updatedList in
-                self?.send(action: .updateList(updatedList))
-            }
+            countryListRouter.openCountryList(
+                viewData: .init(
+                    countryUsecases: countryUsecase,
+                    selectedCountry: state.value.selectedCountry.map(\.country),
+                    completion: { [weak self] updatedList in
+                        self?.send(action: .updateList(updatedList))
+                        
+                    }
+                )
+            )
         case let .updateList(updatedList):
             state.value = .init(
                 selectedCountry: updatedList.map { DefaultCountryCellViewModel(country: $0) }

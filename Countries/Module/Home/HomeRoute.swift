@@ -11,13 +11,13 @@ import Core
 
 protocol HomeRoute {
     typealias Result = () -> [Country]
-    func makeHome() -> UIViewController
+    func makeHome(countryUsecases: CountryUsecase) -> UIViewController 
 }
 
 extension HomeRoute where Self: Router {
-    func makeHome() -> UIViewController {
-        let router = DefaultRouter(rootTransition: PushTransition())
-        let viewModel = DefaultHomeViewModel(countryListRouter: router)
+    func makeHome(countryUsecases: CountryUsecase) -> UIViewController {
+        let router = DefaultCountryListRouter(rootTransition: PushTransition())
+        let viewModel = DefaultHomeViewModel(countryListRouter: router, countryUsecase: countryUsecases)
         let viewController = HomeViewController(viewModel: viewModel)
         let navigation = UINavigationController(rootViewController: viewController)
         router.root = viewController

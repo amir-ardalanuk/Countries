@@ -9,14 +9,22 @@ import Foundation
 import UIKit
 import Core
 
+struct CountryListViewData {
+    var countryUsecases: CountryUsecase
+    var selectedCountry: [Country]
+    var completion: ([Country]) -> Void
+}
+
 protocol CountryListRouter {
-    func openCountryList(completion: @escaping ([Country]) -> Void)
+    func openCountryList(viewData: CountryListViewData)
 }
 
 extension CountryListRouter where Self: Router {
-    func openCountryList(with transition: Transition) {
+    func openCountryList(with transition: Transition, viewData: CountryListViewData) {
         let router = DefaultCountryListRouter(rootTransition: transition)
-        let viewModel = DefaultCountryListViewModel(router: router)
+        //FIXME: It can be handled on ViewModel with ViewData /
+        router.completion = viewData.completion
+        let viewModel = DefaultCountryListViewModel(router: router, countryUsecase: viewData.countryUsecases, selectedCountries: viewData.selectedCountry)
         viewModel.completeEditing = { [weak router] list in
             router?.completion?(list)
         }
@@ -26,12 +34,12 @@ extension CountryListRouter where Self: Router {
         route(to: viewController, as: transition)
     }
     
-    func openCountryList(completion: @escaping ([Country]) -> Void) {
-        openCountryList(with: PushTransition())
+    func openCountryList(viewData: CountryListViewData) {
+        openCountryList(with: PushTransition(), viewData: viewData)
     }
 }
 
-extension DefaultRouter: CountryListRouter {}
+extension DefaultCountryListRouter: CountryListRouter {}
 
 final class DefaultCountryListRouter: DefaultRouter {
     var completion: (([Country]) -> Void)?
