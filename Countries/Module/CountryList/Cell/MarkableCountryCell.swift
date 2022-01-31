@@ -27,12 +27,6 @@ class MarkableCountryCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        viewModel?.didSelect?()
-        // Configure the view for the selected state
-    }
-    
     //MARK: - Config ViewModel
     func config(_ viewModel: MarkableCountryViewModel) {
         self.viewModel = viewModel

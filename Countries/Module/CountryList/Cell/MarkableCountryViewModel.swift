@@ -24,7 +24,6 @@ extension MarkableCountryViewModel {
     }
 }
 
-
 final class DefaultMarkableCountryViewModel: MarkableCountryViewModel {
     var isSelected: Bool
     var didSelect: (() -> Void)?
@@ -36,5 +35,4 @@ final class DefaultMarkableCountryViewModel: MarkableCountryViewModel {
         self.didSelect = didSelect
         self.country = country
     }
-    
 }
