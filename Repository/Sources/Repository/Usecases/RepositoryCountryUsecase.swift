@@ -8,14 +8,14 @@
 import Foundation
 import Core
 
-class RepositoryCountryUsecase: CountryUsecase {
+public class RepositoryCountryUsecase: CountryUsecase {
     let remoteUsecases: CountryUsecase
     
-    init(remoteUsecases: CountryUsecase) {
+    public init(remoteUsecases: CountryUsecase) {
         self.remoteUsecases = remoteUsecases
     }
     
-    func fetchCountryList(completion: @escaping CountryListCompletion) {
+    public func fetchCountryList(completion: @escaping CountryListCompletion) {
         //FIXME: Could be added `LocalUsecases` or decide to bring data from local/cache or load from remote
         self.remoteUsecases.fetchCountryList(completion: completion)
     }

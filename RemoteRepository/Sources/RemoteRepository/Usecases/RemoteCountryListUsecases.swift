@@ -11,7 +11,7 @@ import HTTPClient
 
 public class RemoteCountryListUsecases: CountryUsecase {
     private let client: HTTPClient
-    init(client: HTTPClient) {
+    public init(client: HTTPClient) {
         self.client = client
     }
     
@@ -51,7 +51,7 @@ private class CountryItemsMapper {
             Country.init(
                 id: item.name,
                 name: item.name,
-                flag: item.flag,
+                flag: item.flag ?? "🏁",
                 region: item.region,
                 capital: item.capital.first ?? "-")
         }

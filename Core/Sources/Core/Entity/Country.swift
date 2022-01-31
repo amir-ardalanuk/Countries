@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Country: Equatable {
+public struct Country: Equatable, Hashable {
 
     // MARK: - Properties
     public let id: String

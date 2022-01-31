@@ -16,7 +16,7 @@ extension CountryItem {
         capital: [String] = ["capital"],
         area: Int = 0
     ) -> CountryItem {
-        .init(name: name, region: region, flag: flag, capital: capital, area: area)
+        .init(name: name, region: region, flag: flag, capital: capital)
     }
 }
 
