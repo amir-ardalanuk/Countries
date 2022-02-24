@@ -15,7 +15,6 @@ protocol HomeViewModelProtocol {
     var state: CurrentValueSubject<HomeState, Never> { get }
     var currentState: HomeState { get }
     var router: HomeRouting { get }
-    var countryUsecase: CountryUsecase { get }
 }
 
 //MARK: - Action

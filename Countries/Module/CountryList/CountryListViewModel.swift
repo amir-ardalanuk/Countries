@@ -13,8 +13,6 @@ protocol CountryListViewModelProtocol {
     func send(action: CountryListAction)
     var state: CurrentValueSubject<CountryListState, Never> { get }
     var router: CountryListRouting { get }
-    var completeEditing: (([Country]) -> Void)? { get set }
-    var countryUsecase: CountryUsecase { get }
 }
 
 enum CountryListAction: Equatable {
@@ -55,7 +53,6 @@ class CountryListViewModel: CountryListViewModelProtocol {
     
     var router: CountryListRouting
     var state: CurrentValueSubject<CountryListState, Never>
-    var completeEditing: (([Country]) -> Void)?
     var countryUsecase: CountryUsecase
     var configuration: CountryList.Configuration
     private var countriesCach = [Country]()
