@@ -10,7 +10,7 @@ import Combine
 
 class CountryListViewController: UIViewController {
     //MARK: - Properties
-    var viewModel: CountryListViewModel
+    var viewModel: CountryListViewModelProtocol!
     private var cancellable = Set<AnyCancellable>()
     // MARK: - View's
     lazy var searchBar: UISearchBar = { [unowned self] in
@@ -48,8 +48,7 @@ class CountryListViewController: UIViewController {
     }()
     
     // MARK: - Init
-    init(viewModel: CountryListViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
         title = "Choose Country"
     }

@@ -9,12 +9,10 @@ import UIKit
 import Combine
 import Core
 
-protocol CountryListViewModel {
-    typealias Router = CountryListRouter & Closable
-    
+protocol CountryListViewModelProtocol {
     func send(action: CountryListAction)
     var state: CurrentValueSubject<CountryListState, Never> { get }
-    var router: Router { get }
+    var router: CountryListRouting { get }
     var completeEditing: (([Country]) -> Void)? { get set }
     var countryUsecase: CountryUsecase { get }
 }
@@ -52,21 +50,23 @@ extension CountryListState {
     }
 }
 
-class DefaultCountryListViewModel: CountryListViewModel {
+class CountryListViewModel: CountryListViewModelProtocol {
     //MARK: - Properties
     
-    var router: CountryListViewModel.Router
+    var router: CountryListRouting
     var state: CurrentValueSubject<CountryListState, Never>
     var completeEditing: (([Country]) -> Void)?
     var countryUsecase: CountryUsecase
+    var configuration: CountryList.Configuration
     private var countriesCach = [Country]()
     
     
     //MARK: - Initialize
     
-    init(router: CountryListViewModel.Router, countryUsecase: CountryUsecase, selectedCountries: [Country] = []) {
-        self.state = .init(.init(selectedCountries: selectedCountries, countries: [], isLoading: false))
-        self.countryUsecase = countryUsecase
+    init(router: CountryListRouting, configuration: CountryList.Configuration) {
+        self.state = .init(.init(selectedCountries: configuration.selectedCountries, countries: [], isLoading: false))
+        self.countryUsecase = configuration.countryUseCase
+        self.configuration = configuration
         self.router = router
     }
     
@@ -97,7 +97,7 @@ class DefaultCountryListViewModel: CountryListViewModel {
             let viewModels = generateViewModels(countriesCach, selectedCountries: state.value.selectedCountries)
             state.value = state.value.update(viewModels: viewModels)
         case .doneChoosing:
-            completeEditing?(state.value.selectedCountries)
+            configuration.updatedList(state.value.selectedCountries)
             router.close()
         }
     }

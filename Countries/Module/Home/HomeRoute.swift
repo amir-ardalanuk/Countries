@@ -9,20 +9,24 @@ import Foundation
 import UIKit
 import Core
 
-protocol HomeRoute {
-    typealias Result = () -> [Country]
-    func makeHome(countryUsecases: CountryUsecase) -> UIViewController 
+protocol HomeRouting: Router {
+    func openCountryList(configuration: CountryList.Configuration)
 }
 
-extension HomeRoute where Self: Router {
-    func makeHome(countryUsecases: CountryUsecase) -> UIViewController {
-        let router = DefaultCountryListRouter(rootTransition: PushTransition())
-        let viewModel = DefaultHomeViewModel(countryListRouter: router, countryUsecase: countryUsecases)
-        let viewController = HomeViewController(viewModel: viewModel)
-        let navigation = UINavigationController(rootViewController: viewController)
-        router.root = viewController
-        return navigation
+class HomeRouter: HomeRouting {
+    var viewController: UIViewController
+    var homeViewController: HomeViewController {
+        return viewController as! HomeViewController
+    }
+    
+    init(viewController: HomeViewController) {
+        self.viewController = viewController
+    }
+    
+    func openCountryList(configuration: CountryList.Configuration) {
+        let countryListViewController = CountryListModule().makeScene(configuration: configuration)
+        countryListViewController.modalPresentationStyle = .fullScreen
+        viewController.navigationController?.pushViewController(countryListViewController
+                                                                , animated: true)
     }
 }
-
-extension DefaultRouter: HomeRoute {}

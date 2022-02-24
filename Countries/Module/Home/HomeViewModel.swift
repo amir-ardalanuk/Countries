@@ -10,11 +10,11 @@ import Combine
 import Core
 
 //MARK: - Base Protocol
-protocol HomeViewModel {
+protocol HomeViewModelProtocol {
     func send(action: HomeAction)
     var state: CurrentValueSubject<HomeState, Never> { get }
     var currentState: HomeState { get }
-    var countryListRouter: CountryListRouter { get }
+    var router: HomeRouting { get }
     var countryUsecase: CountryUsecase { get }
 }
 
@@ -31,18 +31,18 @@ struct HomeState {
 
 //MARK: - Concreate HomeViewModel
 
-class DefaultHomeViewModel: HomeViewModel {
+class HomeViewModel: HomeViewModelProtocol {
     var currentState: HomeState {
         return state.value
     }
     var countryUsecase: CountryUsecase
-    var countryListRouter: CountryListRouter
+    var router: HomeRouting
     var state: CurrentValueSubject<HomeState, Never> = .init(.init(selectedCountry: []))
     
     
-    init(countryListRouter: CountryListRouter, countryUsecase: CountryUsecase) {
-        self.countryListRouter = countryListRouter
-        self.countryUsecase = countryUsecase
+    init(router: HomeRouting, config: Home.Configuration) {
+        self.router = router
+        self.countryUsecase = config.countryUseCase
     }
     
     required init?(coder: NSCoder) {
@@ -52,16 +52,10 @@ class DefaultHomeViewModel: HomeViewModel {
     func send(action: HomeAction) {
         switch action {
         case .openCountryList:
-            countryListRouter.openCountryList(
-                viewData: .init(
-                    countryUsecases: countryUsecase,
-                    selectedCountry: state.value.selectedCountry.map(\.country),
-                    completion: { [weak self] updatedList in
-                        self?.send(action: .updateList(updatedList))
-                        
-                    }
-                )
-            )
+            let config = CountryList.Configuration(countryUseCase: countryUsecase, updatedList: { [weak self] updatedList in
+                self?.send(action: .updateList(updatedList))
+            }, selectedCountries: state.value.selectedCountry.map(\.country))
+            router.openCountryList(configuration: config)
         case let .updateList(updatedList):
             state.value = .init(
                 selectedCountry: updatedList.map { DefaultCountryCellViewModel(country: $0) }

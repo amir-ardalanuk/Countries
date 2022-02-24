@@ -15,33 +15,18 @@ struct CountryListViewData {
     var completion: ([Country]) -> Void
 }
 
-protocol CountryListRouter {
-    func openCountryList(viewData: CountryListViewData)
+protocol CountryListRouting: Router {
+    func close()
 }
 
-extension CountryListRouter where Self: Router {
-    func openCountryList(with transition: Transition, viewData: CountryListViewData) {
-        let router = DefaultCountryListRouter(rootTransition: transition)
-        //FIXME: It can be handled on ViewModel with ViewData /
-        router.completion = viewData.completion
-        let viewModel = DefaultCountryListViewModel(router: router, countryUsecase: viewData.countryUsecases, selectedCountries: viewData.selectedCountry)
-        viewModel.completeEditing = { [weak router] list in
-            router?.completion?(list)
-        }
-        let viewController = CountryListViewController(viewModel: viewModel)
-        router.root = viewController
-
-        route(to: viewController, as: transition)
+final class CountryListRouter: CountryListRouting {
+    internal init(viewController: UIViewController) {
+        self.viewController = viewController
     }
     
-    func openCountryList(viewData: CountryListViewData) {
-        openCountryList(with: PushTransition(), viewData: viewData)
+    var viewController: UIViewController
+    
+    func close() {
+        viewController.navigationController?.popViewController(animated: true)
     }
 }
-
-extension DefaultCountryListRouter: CountryListRouter {}
-
-final class DefaultCountryListRouter: DefaultRouter {
-    var completion: (([Country]) -> Void)?
-}
-

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+protocol FeatureModule {
+    associatedtype Controller
+    associatedtype Configuration
+
+    func makeScene(configuration: Configuration) -> Controller
+}

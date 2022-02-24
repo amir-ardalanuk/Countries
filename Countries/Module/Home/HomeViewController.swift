@@ -11,7 +11,7 @@ import Combine
 class HomeViewController: UIViewController {
     //MARK: - Properties
     
-    private(set) var viewModel: HomeViewModel
+    var viewModel: HomeViewModelProtocol!
     private var cancellable = Set<AnyCancellable>()
     
     // MARK: - View's
@@ -46,8 +46,7 @@ class HomeViewController: UIViewController {
         return label
     }()
     
-    init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(nibName: nil, bundle: nil)
         self.title = "Selected Country"
     }

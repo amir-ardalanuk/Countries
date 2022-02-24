@@ -16,16 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let wc = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: wc)
-        let router = DefaultRouter(rootTransition: EmptyTransition())
-        let httpClient = DefaultHTTPClient.init(urlSession: URLSession.shared)
+        
+        /// Prepare dependencies
+        let httpClient = DefaultHTTPClient(urlSession: URLSession.shared)
         let remoteRepository = RemoteCountryListUsecases(client: httpClient)
-        let countryUsecases = RepositoryCountryUsecase.init(remoteUsecases: remoteRepository)
-        window.rootViewController = router.makeHome(countryUsecases: countryUsecases)
+        let countryUsecases = RepositoryCountryUsecase(remoteUsecases: remoteRepository)
+        /// Prepare viewControllers
+        let homeNavigation = HomeModule().makeScene(configuration: Home.Configuration(countryUseCase: countryUsecases))
+        let navigationController = UINavigationController(rootViewController: homeNavigation)
+        /// Present
+        window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window
     }

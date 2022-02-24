@@ -5,4 +5,8 @@
 //  Created by Amir Ardalani on 2/24/22.
 //
 
-import Foundation
+import UIKit
+
+protocol Router {
+    var viewController: UIViewController { get set  }
+}
