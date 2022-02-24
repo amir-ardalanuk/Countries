@@ -10,11 +10,18 @@ import Combine
 import Core
 
 //MARK: - Base Protocol
-protocol HomeViewModelProtocol {
+protocol HomeViewModelProtocol: HomeViewModelRoutingDataSource {
     func send(action: HomeAction)
     var state: CurrentValueSubject<HomeState, Never> { get }
     var currentState: HomeState { get }
-    var router: HomeRouting { get }
+}
+
+protocol HomeViewModelRoutingDataSource {
+    var routeAction: PassthroughSubject<RouteAction, Never> { get set }
+}
+
+enum RouteAction {
+    case openCountryList(CountryList.Configuration)
 }
 
 //MARK: - Action
@@ -31,16 +38,15 @@ struct HomeState {
 //MARK: - Concreate HomeViewModel
 
 class HomeViewModel: HomeViewModelProtocol {
+    var routeAction: PassthroughSubject<RouteAction, Never> = .init()
     var currentState: HomeState {
         return state.value
     }
     var countryUsecase: CountryUsecase
-    var router: HomeRouting
     var state: CurrentValueSubject<HomeState, Never> = .init(.init(selectedCountry: []))
     
     
-    init(router: HomeRouting, config: Home.Configuration) {
-        self.router = router
+    init(config: Home.Configuration) {
         self.countryUsecase = config.countryUseCase
     }
     
@@ -54,7 +60,7 @@ class HomeViewModel: HomeViewModelProtocol {
             let config = CountryList.Configuration(countryUseCase: countryUsecase, updatedList: { [weak self] updatedList in
                 self?.send(action: .updateList(updatedList))
             }, selectedCountries: state.value.selectedCountry.map(\.country))
-            router.openCountryList(configuration: config)
+            routeAction.send(.openCountryList(config))
         case let .updateList(updatedList):
             state.value = .init(
                 selectedCountry: updatedList.map { DefaultCountryCellViewModel(country: $0) }

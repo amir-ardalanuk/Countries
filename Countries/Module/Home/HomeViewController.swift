@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     
     var viewModel: HomeViewModelProtocol!
+    var router: HomeRouting!
     private var cancellable = Set<AnyCancellable>()
     
     // MARK: - View's
@@ -105,7 +106,7 @@ class HomeViewController: UIViewController {
     //MARK: - setup Observer
     
     func setupObserver() {
-        self.viewModel.state
+        viewModel.state
             .map {
                 !$0.selectedCountry.isEmpty
             }.sink { [weak self] isHidden in
@@ -113,10 +114,17 @@ class HomeViewController: UIViewController {
             }
             .store(in: &cancellable)
         
-        self.viewModel.state
+        viewModel.state
             .sink { [weak self] homeState in
             //FIXME: it's better to use diffable datasource and batchUpdate to reload only cells have been changed.
             self?.tableView.reloadData()
+        }.store(in: &cancellable)
+        
+        viewModel.routeAction.sink { [weak self] action in
+            switch action {
+            case let .openCountryList(config):
+                self?.router.openCountryList(configuration: config)
+            }
         }.store(in: &cancellable)
     }
 }

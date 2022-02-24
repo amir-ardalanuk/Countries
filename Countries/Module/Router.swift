@@ -8,5 +8,5 @@
 import UIKit
 
 protocol Router {
-    var viewController: UIViewController { get set  }
+    var viewController: UIViewController? { get set  }
 }

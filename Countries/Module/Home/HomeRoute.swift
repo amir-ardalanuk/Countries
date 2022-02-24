@@ -8,13 +8,16 @@
 import Foundation
 import UIKit
 import Core
+import Combine
 
 protocol HomeRouting: Router {
     func openCountryList(configuration: CountryList.Configuration)
 }
 
 class HomeRouter: HomeRouting {
-    var viewController: UIViewController
+    weak var viewController: UIViewController?
+    var cancellable = Set<AnyCancellable>()
+    
     var homeViewController: HomeViewController {
         return viewController as! HomeViewController
     }
@@ -26,7 +29,6 @@ class HomeRouter: HomeRouting {
     func openCountryList(configuration: CountryList.Configuration) {
         let countryListViewController = CountryListModule().makeScene(configuration: configuration)
         countryListViewController.modalPresentationStyle = .fullScreen
-        viewController.navigationController?.pushViewController(countryListViewController
-                                                                , animated: true)
+        viewController?.navigationController?.pushViewController(countryListViewController, animated: true)
     }
 }
