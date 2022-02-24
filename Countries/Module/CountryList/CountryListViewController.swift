@@ -11,6 +11,7 @@ import Combine
 class CountryListViewController: UIViewController {
     //MARK: - Properties
     var viewModel: CountryListViewModelProtocol!
+    var router: CountryListRouter!
     private var cancellable = Set<AnyCancellable>()
     // MARK: - View's
     lazy var searchBar: UISearchBar = { [unowned self] in
@@ -125,6 +126,13 @@ class CountryListViewController: UIViewController {
             //FIXME: it's better to use diffable datasource and batchUpdate to reload only cells have been changed.
             self?.tableView.reloadData()
         }.store(in: &cancellable)
+        
+        viewModel.routeAction.sink(receiveValue: { [weak self] action in
+            switch action {
+            case .close:
+                self?.router.close()
+            }
+        }).store(in: &cancellable)
     }
 }
 

@@ -20,12 +20,11 @@ protocol CountryListRouting: Router {
 }
 
 final class CountryListRouter: CountryListRouting {
+    weak var viewController: UIViewController?
     
-    internal init(viewController: UIViewController) {
+    init(viewController: UIViewController) {
         self.viewController = viewController
     }
-    
-    weak var viewController: UIViewController?
     
     func close() {
         viewController?.navigationController?.popViewController(animated: true)

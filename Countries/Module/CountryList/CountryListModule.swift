@@ -23,14 +23,11 @@ class CountryListModule: FeatureModule {
     func makeScene(configuration: CountryList.Configuration) -> CountryListViewController {
         let viewController = CountryListViewController()
         let router = CountryListRouter(viewController: viewController)
-        let viewModel = viewModelBuilder(router: router, configuration: configuration)
+        let viewModel = CountryListViewModel(configuration: configuration)
         
         viewController.viewModel = viewModel
-        router.viewController = viewController
+        viewController.router = router
         
         return viewController
-    }
-    private func viewModelBuilder(router: CountryListRouting, configuration: CountryList.Configuration) -> CountryListViewModelProtocol {
-        CountryListViewModel(router: router, configuration: configuration)
     }
 }

@@ -9,10 +9,17 @@ import UIKit
 import Combine
 import Core
 
-protocol CountryListViewModelProtocol {
+protocol CountryListRouteDataSource {
+    var routeAction: PassthroughSubject<CountryListRouteAction, Never> { get set }
+}
+
+protocol CountryListViewModelProtocol: CountryListRouteDataSource {
+    var state: CurrentValueSubject<CountryListState, Never> { get set }
     func send(action: CountryListAction)
-    var state: CurrentValueSubject<CountryListState, Never> { get }
-    var router: CountryListRouting { get }
+}
+
+enum CountryListRouteAction {
+    case close
 }
 
 enum CountryListAction: Equatable {
@@ -50,8 +57,7 @@ extension CountryListState {
 
 class CountryListViewModel: CountryListViewModelProtocol {
     //MARK: - Properties
-    
-    var router: CountryListRouting
+    var routeAction = PassthroughSubject<CountryListRouteAction, Never>()
     var state: CurrentValueSubject<CountryListState, Never>
     var countryUsecase: CountryUsecase
     var configuration: CountryList.Configuration
@@ -60,11 +66,10 @@ class CountryListViewModel: CountryListViewModelProtocol {
     
     //MARK: - Initialize
     
-    init(router: CountryListRouting, configuration: CountryList.Configuration) {
+    init(configuration: CountryList.Configuration) {
         self.state = .init(.init(selectedCountries: configuration.selectedCountries, countries: [], isLoading: false))
         self.countryUsecase = configuration.countryUseCase
         self.configuration = configuration
-        self.router = router
     }
     
     required init?(coder: NSCoder) {
@@ -95,7 +100,7 @@ class CountryListViewModel: CountryListViewModelProtocol {
             state.value = state.value.update(viewModels: viewModels)
         case .doneChoosing:
             configuration.updatedList(state.value.selectedCountries)
-            router.close()
+            routeAction.send(.close)
         }
     }
     
