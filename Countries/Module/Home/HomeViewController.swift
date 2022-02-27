@@ -10,12 +10,11 @@ import Combine
 
 class HomeViewController: UIViewController {
     //MARK: - Properties
-    
     var viewModel: HomeViewModelProtocol!
     var router: HomeRouting!
     private var cancellable = Set<AnyCancellable>()
     
-    // MARK: - View's
+    // MARK: - Views
     
     lazy var tableView: UITableView = { [unowned self] in
         let view = UITableView(frame: self.view.frame)
@@ -47,6 +46,7 @@ class HomeViewController: UIViewController {
         return label
     }()
     
+    // MARK: - Init
     init() {
         super.init(nibName: nil, bundle: nil)
         self.title = "Selected Country"
@@ -60,13 +60,13 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraint()
-        setupObserver()
+        bindViewModel()
     }
     
     //MARK: - Selectors
     
     @objc private func didTapOnChooseCountry(_ sender: Any) {
-        self.viewModel.send(action: .openCountryList)
+        viewModel.handelAction(.openCountryList)
     }
     
     //MARK: - setup Views
@@ -103,9 +103,9 @@ class HomeViewController: UIViewController {
         NSLayoutConstraint.activate(tableViewConstraint)
     }
     
-    //MARK: - setup Observer
+    //MARK: - bind viewModel
     
-    func setupObserver() {
+    func bindViewModel() {
         viewModel.state
             .map {
                 !$0.selectedCountry.isEmpty
@@ -116,10 +116,10 @@ class HomeViewController: UIViewController {
         
         viewModel.state
             .sink { [weak self] homeState in
-            //FIXME: it's better to use diffable datasource and batchUpdate to reload only cells have been changed.
             self?.tableView.reloadData()
         }.store(in: &cancellable)
         
+        // MARK: - Observing to the route action
         viewModel.routeAction.sink { [weak self] action in
             switch action {
             case let .openCountryList(config):

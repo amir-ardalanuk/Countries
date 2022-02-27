@@ -16,7 +16,6 @@ protocol HomeRouting: Router {
 
 class HomeRouter: HomeRouting {
     weak var viewController: UIViewController?
-    var cancellable = Set<AnyCancellable>()
     
     var homeViewController: HomeViewController {
         return viewController as! HomeViewController
