@@ -163,11 +163,11 @@
 		8B4B27DE27A6894100C06EB8 /* CountryList */ = {
 			isa = PBXGroup;
 			children = (
+				DDFDD5F727CBD964005A9A4E /* Datasource */,
 				DDFDD5F427CBD74F005A9A4E /* ViewModel */,
 				8B6DCE0E27A6CEA100413FBA /* Cell */,
 				8B4B27DF27A68A3300C06EB8 /* CountryListViewController.swift */,
 				8B4B27E327A68ABF00C06EB8 /* CountryListRoute.swift */,
-				8B6DCE0C27A6CDDB00413FBA /* CountryListViewContoller+TableViewDelegate&Datasource.swift */,
 				8B7D5FA327C7945200ECAEFB /* CountryListModule.swift */,
 			);
 			path = CountryList;
@@ -275,6 +275,14 @@
 				DDFDD5F527CBD8BC005A9A4E /* CountryListViewModelProtocol.swift */,
 			);
 			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		DDFDD5F727CBD964005A9A4E /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				8B6DCE0C27A6CDDB00413FBA /* CountryListViewContoller+TableViewDelegate&Datasource.swift */,
+			);
+			name = Datasource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

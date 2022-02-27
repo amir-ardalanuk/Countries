@@ -13,6 +13,7 @@ class CountryListViewController: UIViewController {
     var viewModel: CountryListViewModelProtocol!
     var router: CountryListRouter!
     private var cancellable = Set<AnyCancellable>()
+
     // MARK: - View's
     lazy var searchBar: UISearchBar = { [unowned self] in
         let searchBar = UISearchBar()
@@ -64,18 +65,18 @@ class CountryListViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraint()
-        setupObserver()
+        bindViewModel()
         navigationItem.rightBarButtonItem = doneBarButtonItem
         viewModel.send(action: .fetchCountry)
     }
     
     //MARK: - Selectors
     @objc private func refreshDidChange(_ sender: Any) {
-        self.viewModel.send(action: .fetchCountry)
+        viewModel.send(action: .fetchCountry)
     }
     
     @objc private func didTapOnDone(_ sender: Any) {
-        self.viewModel.send(action: .doneChoosing)
+        viewModel.send(action: .doneChoosing)
     }
     
     //MARK: - setup Views
@@ -107,7 +108,7 @@ class CountryListViewController: UIViewController {
     
     //MARK: - setup Observer
     
-    func setupObserver() {
+    func bindViewModel() {
         self.viewModel.state
             .map {
                 $0.isLoading
