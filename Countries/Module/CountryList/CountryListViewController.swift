@@ -11,7 +11,7 @@ import Combine
 class CountryListViewController: UIViewController {
     //MARK: - Properties
     var viewModel: CountryListViewModelProtocol!
-    var router: CountryListRouter!
+    var router: CountryListRouting!
     private var cancellable = Set<AnyCancellable>()
 
     // MARK: - View's
@@ -144,7 +144,6 @@ extension CountryListViewController: UISearchBarDelegate {
         } else {
             self.viewModel.handel(action: .search(searchText))
         }
-        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
