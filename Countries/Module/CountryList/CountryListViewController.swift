@@ -42,7 +42,7 @@ class CountryListViewController: UIViewController {
         return controller
     }()
     
-    lazy var doneBarButtonItem: UIBarButtonItem = {[unowned self] in
+    lazy var doneBarButtonItem: UIBarButtonItem = { [unowned self] in
         let doneAction = UIBarButtonItem(systemItem: .done, primaryAction: nil, menu: nil)
         doneAction.target = self
         doneAction.action = #selector(didTapOnDone(_:))
