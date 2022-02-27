@@ -9,11 +9,11 @@ import UIKit
 import Combine
 import Core
 
-protocol CountryListRouteDataSource {
+protocol CountryListRoutingAction {
     var routeAction: PassthroughSubject<CountryListRouteAction, Never> { get set }
 }
 
-protocol CountryListViewModelProtocol: CountryListRouteDataSource {
+protocol CountryListViewModelProtocol: CountryListRoutingAction {
     var state: CurrentValueSubject<CountryListState, Never> { get set }
     func send(action: CountryListAction)
 }
