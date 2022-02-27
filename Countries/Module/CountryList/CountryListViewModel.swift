@@ -34,15 +34,8 @@ class CountryListViewModel: CountryListViewModelProtocol {
         switch action {
         case .fetchCountry:
             fetchCountryList()
-            fetchCountryList()
-        case .updateCountryList(let array):
-            let currentState = state.value
-            let viewModels = generateViewModels(array, selectedCountries: state.value.selectedCountries)
-            self.state.value = .init(
-                selectedCountries: currentState.selectedCountries,
-                countries: viewModels,
-                isLoading: false
-            )
+        case let .updateCountryList(list):
+            updateCountryList(list)
         case .toggleSelected(let country):
             updateSelectedList(withToggle: country)
         case let .search(text):
@@ -56,6 +49,16 @@ class CountryListViewModel: CountryListViewModelProtocol {
         }
     }
     
+    // MARK: - updating Country List
+    func updateCountryList(_ list: [Country]) {
+        let currentState = state.value
+        let viewModels = generateViewModels(list, selectedCountries: state.value.selectedCountries)
+        self.state.value = .init(
+            selectedCountries: currentState.selectedCountries,
+            countries: viewModels,
+            isLoading: false
+        )
+    }
     //MARK: - Searching
     private func search(_ text: String) {
         let filterdCountries = countriesCach.filter { $0.name.contains(text) }
