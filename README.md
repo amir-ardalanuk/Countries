@@ -15,9 +15,9 @@ The **App** module is a presentation layer that has **Module** directory. The mo
 
 
 # Task
-
+- [ ] Remove all Callback and use `Combine` or `Async/await`
 - [ ] Draw Diagram for Architecture 
 - [ ] Write UnitTest for module and app
 - [ ] Implement Caching for keep remote data
 - [ ] Impleemt Database for keep selected user data
-- [ ] Refactor CountryListViewModel - make better performance with  by observer only on chaning data
+- [ ] Refactor CountryListViewModel - make better performance by observer only on chaning data
