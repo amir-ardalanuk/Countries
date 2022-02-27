@@ -37,6 +37,7 @@
 		8BCB980427A533E900D1346D /* CountriesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB980327A533E900D1346D /* CountriesUITests.swift */; };
 		8BCB980627A533E900D1346D /* CountriesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCB980527A533E900D1346D /* CountriesUITestsLaunchTests.swift */; };
 		DDFDD5EF27CBD65D005A9A4E /* HomeViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFDD5EE27CBD65D005A9A4E /* HomeViewModelProtocol.swift */; };
+		DDFDD5F627CBD8BC005A9A4E /* CountryListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFDD5F527CBD8BC005A9A4E /* CountryListViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		8BCB980327A533E900D1346D /* CountriesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUITests.swift; sourceTree = "<group>"; };
 		8BCB980527A533E900D1346D /* CountriesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountriesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		DDFDD5EE27CBD65D005A9A4E /* HomeViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelProtocol.swift; sourceTree = "<group>"; };
+		DDFDD5F527CBD8BC005A9A4E /* CountryListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewModelProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				8B4B27E127A68A5B00C06EB8 /* CountryListViewModel.swift */,
+				DDFDD5F527CBD8BC005A9A4E /* CountryListViewModelProtocol.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				8B7D5FA127C77ECE00ECAEFB /* Router.swift in Sources */,
 				8B7D5F9C27C77D0A00ECAEFB /* HomeModule.swift in Sources */,
 				8B6DCE1127A6CEC500413FBA /* MarkableCountryCell.swift in Sources */,
+				DDFDD5F627CBD8BC005A9A4E /* CountryListViewModelProtocol.swift in Sources */,
 				8B4B27DD27A686E200C06EB8 /* HomeViewModel.swift in Sources */,
 				8B4B27E427A68ABF00C06EB8 /* CountryListRoute.swift in Sources */,
 				8B7D5FA427C7945200ECAEFB /* CountryListModule.swift in Sources */,
