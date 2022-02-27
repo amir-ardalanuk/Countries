@@ -29,12 +29,12 @@ class HomeViewModel: HomeViewModelProtocol {
     // MARK: - Handel Receive Actions
     private func openCountryList() {
         let config = CountryList.Configuration(countryUseCase: countryUsecase, updatedList: { [weak self] updatedList in
-            self?.handelAction(.updateList(updatedList))
+            self?.handel(action: .updateList(updatedList))
         }, selectedCountries: state.value.selectedCountry.map(\.country))
         routeAction.send(.openCountryList(config))
     }
     
-    func handelAction(_ action: HomeAction) {
+    func handel(action: HomeAction) {
         switch action {
         case .openCountryList:
             openCountryList()

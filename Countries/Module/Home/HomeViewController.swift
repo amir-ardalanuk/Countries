@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
     //MARK: - Selectors
     
     @objc private func didTapOnChooseCountry(_ sender: Any) {
-        viewModel.handelAction(.openCountryList)
+        viewModel.handel(action: .openCountryList)
     }
     
     //MARK: - setup Views

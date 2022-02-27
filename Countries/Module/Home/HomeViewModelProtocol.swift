@@ -11,7 +11,7 @@ import Combine
 
 //MARK: - Base Protocol
 protocol HomeViewModelProtocol: HomeViewModelRoutingAction {
-    func handelAction(_ action: HomeAction)
+    func handel(action: HomeAction)
     var state: CurrentValueSubject<HomeState, Never> { get }
     var currentState: HomeState { get }
 }
