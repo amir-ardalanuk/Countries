@@ -95,8 +95,7 @@ class CountryListViewModel: CountryListViewModelProtocol {
     // MARK: - Fetch Countries
     
     private func fetchCountryList() {
-        //FIXME: call api
-        state.value = self.state.value.update(loading: true)
+        state.value = state.value.update(loading: true)
         countryUsecase.fetchCountryList { [weak self] result in
             switch result {
             case let .success(values):
