@@ -10,7 +10,7 @@ import Combine
 import Core
 
 class HomeViewModel: HomeViewModelProtocol {
-    var routeAction: PassthroughSubject<RouteAction, Never> = .init()
+    var routeAction: PassthroughSubject<HomeRouteAction, Never> = .init()
     var currentState: HomeState {
         return state.value
     }
