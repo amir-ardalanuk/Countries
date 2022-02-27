@@ -10,17 +10,17 @@ import Core
 import Combine
 
 //MARK: - Base Protocol
-protocol HomeViewModelProtocol: HomeViewModelRoutingDataSource {
+protocol HomeViewModelProtocol: HomeViewModelRoutingAction {
     func handelAction(_ action: HomeAction)
     var state: CurrentValueSubject<HomeState, Never> { get }
     var currentState: HomeState { get }
 }
 
-protocol HomeViewModelRoutingDataSource {
-    var routeAction: PassthroughSubject<RouteAction, Never> { get set }
+protocol HomeViewModelRoutingAction {
+    var routeAction: PassthroughSubject<HomeRouteAction, Never> { get set }
 }
 
-enum RouteAction {
+enum HomeRouteAction {
     case openCountryList(CountryList.Configuration)
 }
 
