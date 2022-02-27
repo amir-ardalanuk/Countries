@@ -11,13 +11,11 @@ import Core
 
 class CountryListViewModel: CountryListViewModelProtocol {
     //MARK: - Properties
+    private var countriesCach = [Country]()
+    private var countryUsecase: CountryUsecase
+    private var configuration: CountryList.Configuration
     var routeAction = PassthroughSubject<CountryListRouteAction, Never>()
     var state: CurrentValueSubject<CountryListState, Never>
-    var countryUsecase: CountryUsecase
-    var configuration: CountryList.Configuration
-    private var countriesCach = [Country]()
-    
-    
     //MARK: - Initialize
     
     init(configuration: CountryList.Configuration) {
@@ -59,14 +57,14 @@ class CountryListViewModel: CountryListViewModelProtocol {
     }
     
     //MARK: - Searching
-    func search(_ text: String) {
+    private func search(_ text: String) {
         let filterdCountries = countriesCach.filter { $0.name.contains(text) }
         let viewModels = generateViewModels(filterdCountries, selectedCountries: state.value.selectedCountries)
         state.value = state.value.update(viewModels: viewModels)
     }
     
     //MARK: - Generate ViewModels
-    func generateViewModels(_ list: [Country], selectedCountries: [Country]) -> [MarkableCountryViewModel] {
+    private func generateViewModels(_ list: [Country], selectedCountries: [Country]) -> [MarkableCountryViewModel] {
         let selectedIds = selectedCountries.map { $0.id}
         return list.map {
             DefaultMarkableCountryViewModel(
@@ -80,7 +78,7 @@ class CountryListViewModel: CountryListViewModelProtocol {
     }
     
     // MARK: - Update Selected List
-    func updateSelectedList(withToggle country: Country) {
+    private func updateSelectedList(withToggle country: Country) {
         let currentState = state.value
         var newCountries = currentState.selectedCountries
         if let index = currentState.selectedCountries.firstIndex(where: { $0.id == country.id}) {
