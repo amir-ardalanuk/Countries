@@ -67,16 +67,16 @@ class CountryListViewController: UIViewController {
         setupConstraint()
         bindViewModel()
         navigationItem.rightBarButtonItem = doneBarButtonItem
-        viewModel.send(action: .fetchCountry)
+        viewModel.handel(action: .fetchCountry)
     }
     
     //MARK: - Selectors
     @objc private func refreshDidChange(_ sender: Any) {
-        viewModel.send(action: .fetchCountry)
+        viewModel.handel(action: .fetchCountry)
     }
     
     @objc private func didTapOnDone(_ sender: Any) {
-        viewModel.send(action: .doneChoosing)
+        viewModel.handel(action: .doneChoosing)
     }
     
     //MARK: - setup Views
@@ -141,14 +141,14 @@ class CountryListViewController: UIViewController {
 extension CountryListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
-            self.viewModel.send(action: .cancelSearch)
+            self.viewModel.handel(action: .cancelSearch)
         } else {
-            self.viewModel.send(action: .search(searchText))
+            self.viewModel.handel(action: .search(searchText))
         }
         
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.viewModel.send(action: .cancelSearch)
+        self.viewModel.handel(action: .cancelSearch)
     }
 }

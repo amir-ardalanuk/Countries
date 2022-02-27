@@ -30,7 +30,7 @@ class CountryListViewModel: CountryListViewModelProtocol {
     
     //MARK: - Action
     
-    func send(action: CountryListAction) {
+    func handel(action: CountryListAction) {
         switch action {
         case .fetchCountry:
             fetchCountryList()
@@ -70,7 +70,7 @@ class CountryListViewModel: CountryListViewModelProtocol {
             DefaultMarkableCountryViewModel(
                 isSelected: selectedIds.contains($0.id),
                 didSelect: { [_country = $0, weak self] in
-                    self?.send(action: .toggleSelected(_country))
+                    self?.handel(action: .toggleSelected(_country))
                 },
                 country: $0
             )
@@ -99,7 +99,7 @@ class CountryListViewModel: CountryListViewModelProtocol {
             case let .success(values):
                 DispatchQueue.main.async { [weak self] in
                     self?.countriesCach = values
-                    self?.send(action: .updateCountryList(values))
+                    self?.handel(action: .updateCountryList(values))
                 }
             case let .failure(error):
                 print(error)

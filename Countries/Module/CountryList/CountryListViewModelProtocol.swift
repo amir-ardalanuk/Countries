@@ -15,7 +15,7 @@ protocol CountryListRoutingAction {
 
 protocol CountryListViewModelProtocol: CountryListRoutingAction {
     var state: CurrentValueSubject<CountryListState, Never> { get set }
-    func send(action: CountryListAction)
+    func handel(action: CountryListAction)
 }
 
 enum CountryListRouteAction {
