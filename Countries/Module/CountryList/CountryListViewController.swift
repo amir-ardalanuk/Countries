@@ -109,10 +109,9 @@ class CountryListViewController: UIViewController {
     //MARK: - setup Observer
     
     func bindViewModel() {
-        self.viewModel.state
-            .map {
-                $0.isLoading
-            }.sink { [weak self] isLoading in
+        viewModel.state
+            .map(\.isLoading)
+            .sink { [weak self] isLoading in
                 if isLoading {
                     self?.refresher.beginRefreshing()
                 } else {
@@ -122,7 +121,7 @@ class CountryListViewController: UIViewController {
             }
             .store(in: &cancellable)
         
-        self.viewModel.state
+        viewModel.state
             .sink { [weak self] homeState in
             //FIXME: it's better to use diffable datasource and batchUpdate to reload only cells have been changed.
             self?.tableView.reloadData()
