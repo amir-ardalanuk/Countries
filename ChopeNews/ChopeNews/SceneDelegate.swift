@@ -6,6 +6,10 @@
 //
 
 import UIKit
+import Core
+import HTTPClient
+import RemoteRepository
+import Repository
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -14,9 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
+        /// Prepare dependencies
+        let httpClient = DefaultHTTPClient(urlSession: URLSession.shared)
+        let remoteRepository = RemoteNewsUsecase(client: httpClient)
+        let newsUsecases = RepositoryNewsUsecase(remoteUsecases: remoteRepository)
+        /// Prepare root view's
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = NewsListModule().makeScene(configuration: .init(apiKey: ""))
+        window.rootViewController = NewsListModule().makeScene(configuration: .init(apiKey: "", newsUsecases: newsUsecases))
         self.window = window
         window.makeKeyAndVisible()
     }

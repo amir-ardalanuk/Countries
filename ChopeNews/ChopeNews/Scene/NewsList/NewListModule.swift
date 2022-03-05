@@ -11,6 +11,7 @@ import Core
 enum NewsList {
     struct Configuration {
         let apiKey: String
+        let newsUsecases: NewsUsecase
     }
 }
 

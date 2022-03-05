@@ -26,6 +26,7 @@ class NewsListViewController: UIViewController {
         tableView.rowHeight = Layout.rowHeight
         tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
     
@@ -34,6 +35,7 @@ class NewsListViewController: UIViewController {
         self.viewModel = viewModel
         self.router = router
         super.init(nibName: nil, bundle: nil)
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -41,19 +43,55 @@ class NewsListViewController: UIViewController {
     }
     
     // MARK: - SetupView
+    private func setupView() {
+        view.backgroundColor = .white
+        view.addSubview(tableView)
+        setupConstraint()
+    }
+    
+    private func setupConstraint() {
+        let tablewViewConstriant = [
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+        ]
+        NSLayoutConstraint.activate(tablewViewConstriant)
+    }
     
     // MARK: - bind ViewModel
-    
+    private func bind() {
+        
+    }
 }
 
 extension NewsListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return viewModel.currentNews.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let values = viewModel.currentNews.value else {
+            fatalError()
+        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
+        cell.contentConfiguration = viewModel.map(item: values[indexPath.row])
         return UITableViewCell()
+    }  
+}
+
+fileprivate extension NewsListViewModelProtocol {
+    var currentNews: Loadable<[NewsListViewModelState.Item]> {
+        state.value.newsList
     }
     
+    func map(item: NewsListViewModelState.Item) -> UIContentConfiguration? {
+        switch item {
+        case let .news(data):
+            return NewsRowConfiguration(news: data)
+        case .hole(_):
+            return nil
+        }
+    }
     
 }

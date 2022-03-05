@@ -8,16 +8,16 @@
 import Foundation
 
 public struct News: Hashable {
-    let author: String?
-    let title: String?
-    let description: String
-    let url: String
-    let source: String
-    let image: String?
-    let category: String?
-    let language: String?
-    let country: String?
-    let publishedAt: Date
+    public let author: String?
+    public let title: String?
+    public let description: String
+    public let url: String
+    public let source: String
+    public let image: String?
+    public let category: String?
+    public let language: String?
+    public let country: String?
+    public let publishedAt: Date
     
     public init(author: String?, title: String?, description: String, url: String, source: String, image: String?, category: String?, language: String?, country: String?, publishedAt: Date) {
         self.author = author
