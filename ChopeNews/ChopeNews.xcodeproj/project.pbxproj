@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		DD5FA79C27D3968F0086525C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA79B27D3968F0086525C /* AppDelegate.swift */; };
 		DD5FA79E27D3968F0086525C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA79D27D3968F0086525C /* SceneDelegate.swift */; };
-		DD5FA7A027D3968F0086525C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA79F27D3968F0086525C /* ViewController.swift */; };
-		DD5FA7A327D3968F0086525C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5FA7A127D3968F0086525C /* Main.storyboard */; };
 		DD5FA7A527D3968F0086525C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD5FA7A427D3968F0086525C /* Assets.xcassets */; };
 		DD5FA7A827D3968F0086525C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD5FA7A627D3968F0086525C /* LaunchScreen.storyboard */; };
+		DD5FA7B627D3AA280086525C /* FeatureModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7B427D3AA280086525C /* FeatureModule.swift */; };
+		DD5FA7B727D3AA280086525C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7B527D3AA280086525C /* Router.swift */; };
+		DD5FA7B927D3AA3A0086525C /* NewListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7B827D3AA3A0086525C /* NewListModule.swift */; };
+		DD5FA7BB27D3AABC0086525C /* NewsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7BA27D3AABC0086525C /* NewsListViewController.swift */; };
+		DD5FA7BD27D3AAD70086525C /* NewListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7BC27D3AAD70086525C /* NewListViewModel.swift */; };
+		DD5FA7BF27D3AB060086525C /* NewsListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7BE27D3AB060086525C /* NewsListRouter.swift */; };
+		DD5FA7C227D3AEB00086525C /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7C127D3AEB00086525C /* Loadable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DD5FA79827D3968F0086525C /* ChopeNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChopeNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5FA79B27D3968F0086525C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DD5FA79D27D3968F0086525C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DD5FA79F27D3968F0086525C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DD5FA7A227D3968F0086525C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD5FA7A427D3968F0086525C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD5FA7A727D3968F0086525C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD5FA7A927D3968F0086525C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DD5FA7B427D3AA280086525C /* FeatureModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeatureModule.swift; sourceTree = "<group>"; };
+		DD5FA7B527D3AA280086525C /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		DD5FA7B827D3AA3A0086525C /* NewListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListModule.swift; sourceTree = "<group>"; };
+		DD5FA7BA27D3AABC0086525C /* NewsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListViewController.swift; sourceTree = "<group>"; };
+		DD5FA7BC27D3AAD70086525C /* NewListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListViewModel.swift; sourceTree = "<group>"; };
+		DD5FA7BE27D3AB060086525C /* NewsListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListRouter.swift; sourceTree = "<group>"; };
+		DD5FA7C127D3AEB00086525C /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,11 +66,11 @@
 		DD5FA79A27D3968F0086525C /* ChopeNews */ = {
 			isa = PBXGroup;
 			children = (
+				DD5FA7C027D3AEA40086525C /* Common */,
 				DD5FA7B027D396C00086525C /* Scene */,
 				DD5FA7AF27D396B40086525C /* Resources */,
 				DD5FA79B27D3968F0086525C /* AppDelegate.swift */,
 				DD5FA79D27D3968F0086525C /* SceneDelegate.swift */,
-				DD5FA79F27D3968F0086525C /* ViewController.swift */,
 			);
 			path = ChopeNews;
 			sourceTree = "<group>";
@@ -68,7 +78,6 @@
 		DD5FA7AF27D396B40086525C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DD5FA7A127D3968F0086525C /* Main.storyboard */,
 				DD5FA7A427D3968F0086525C /* Assets.xcassets */,
 				DD5FA7A627D3968F0086525C /* LaunchScreen.storyboard */,
 				DD5FA7A927D3968F0086525C /* Info.plist */,
@@ -79,6 +88,8 @@
 		DD5FA7B027D396C00086525C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DD5FA7B427D3AA280086525C /* FeatureModule.swift */,
+				DD5FA7B527D3AA280086525C /* Router.swift */,
 				DD5FA7B127D396CC0086525C /* NewsList */,
 			);
 			path = Scene;
@@ -87,8 +98,20 @@
 		DD5FA7B127D396CC0086525C /* NewsList */ = {
 			isa = PBXGroup;
 			children = (
+				DD5FA7B827D3AA3A0086525C /* NewListModule.swift */,
+				DD5FA7BA27D3AABC0086525C /* NewsListViewController.swift */,
+				DD5FA7BC27D3AAD70086525C /* NewListViewModel.swift */,
+				DD5FA7BE27D3AB060086525C /* NewsListRouter.swift */,
 			);
 			path = NewsList;
+			sourceTree = "<group>";
+		};
+		DD5FA7C027D3AEA40086525C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DD5FA7C127D3AEB00086525C /* Loadable.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,7 +174,6 @@
 			files = (
 				DD5FA7A827D3968F0086525C /* LaunchScreen.storyboard in Resources */,
 				DD5FA7A527D3968F0086525C /* Assets.xcassets in Resources */,
-				DD5FA7A327D3968F0086525C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +184,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD5FA7A027D3968F0086525C /* ViewController.swift in Sources */,
+				DD5FA7B627D3AA280086525C /* FeatureModule.swift in Sources */,
+				DD5FA7B927D3AA3A0086525C /* NewListModule.swift in Sources */,
+				DD5FA7C227D3AEB00086525C /* Loadable.swift in Sources */,
+				DD5FA7BD27D3AAD70086525C /* NewListViewModel.swift in Sources */,
+				DD5FA7BB27D3AABC0086525C /* NewsListViewController.swift in Sources */,
+				DD5FA7B727D3AA280086525C /* Router.swift in Sources */,
+				DD5FA7BF27D3AB060086525C /* NewsListRouter.swift in Sources */,
 				DD5FA79C27D3968F0086525C /* AppDelegate.swift in Sources */,
 				DD5FA79E27D3968F0086525C /* SceneDelegate.swift in Sources */,
 			);
@@ -171,14 +199,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DD5FA7A127D3968F0086525C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DD5FA7A227D3968F0086525C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DD5FA7A627D3968F0086525C /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -317,7 +337,6 @@
 				INFOPLIST_FILE = ChopeNews/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -344,7 +363,6 @@
 				INFOPLIST_FILE = ChopeNews/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
