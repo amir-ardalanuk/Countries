@@ -89,8 +89,12 @@ fileprivate extension NewsListViewModelProtocol {
         switch item {
         case let .news(data):
             return NewsRowConfiguration(news: data)
-        case .hole(_):
-            return nil
+        case let .hole(page):
+            let config = HoleRowConfiguration(page: page)
+            config.load.sink { [weak self] page in
+                self?.action(.fetchPage(page))
+            }.store(in: &cancellables)
+            return config
         }
     }
     

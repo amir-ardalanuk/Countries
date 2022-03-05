@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Core
 
-protocol NewsListViewModelProtocol {
+protocol NewsListViewModelProtocol: BaseViewModel {
     var state: CurrentValueSubject<NewsListViewModelState, NewsListViewModelError> { get }
     func action(_ action:NewsListViewModelAction)
 }
@@ -46,7 +46,13 @@ final class NewsListViewModel: NewsListViewModelProtocol {
     
     // MARK: - Properties
     private let newsUsecase: NewsUsecase
-    private var cancellable = Set<AnyCancellable>()
+    var cancellables = Set<AnyCancellable>() {
+        didSet {
+            print(" ===== > CANCELLABLES")
+            print(cancellables.count)
+            print(" =====  CANCELLABLES")
+        }
+    }
     var state: CurrentValueSubject<NewsListViewModelState, NewsListViewModelError>
     
     // MARK: - Initialization
@@ -82,7 +88,7 @@ final class NewsListViewModel: NewsListViewModelProtocol {
                 }
             } receiveValue: { [weak self] list in
                 self?.action(.fetchCompleted(page, list))
-            }.store(in: &cancellable)
+            }.store(in: &cancellables)
 
     }
 }

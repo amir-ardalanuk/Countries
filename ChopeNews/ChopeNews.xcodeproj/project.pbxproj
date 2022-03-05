@@ -24,6 +24,8 @@
 		DD5FA7CB27D3B55C0086525C /* Repository in Frameworks */ = {isa = PBXBuildFile; productRef = DD5FA7CA27D3B55C0086525C /* Repository */; };
 		DD5FA7CE27D3B6060086525C /* NewsRowConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7CD27D3B6060086525C /* NewsRowConfiguration.swift */; };
 		DD5FA7D127D3B8520086525C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD5FA7D027D3B8520086525C /* Kingfisher */; };
+		DD5FA7D527D3BD8D0086525C /* HoleRowConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7D427D3BD8D0086525C /* HoleRowConfiguration.swift */; };
+		DD5FA7D727D3C0140086525C /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7D627D3C0140086525C /* BaseViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		DD5FA7BE27D3AB060086525C /* NewsListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListRouter.swift; sourceTree = "<group>"; };
 		DD5FA7C127D3AEB00086525C /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		DD5FA7CD27D3B6060086525C /* NewsRowConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRowConfiguration.swift; sourceTree = "<group>"; };
+		DD5FA7D427D3BD8D0086525C /* HoleRowConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleRowConfiguration.swift; sourceTree = "<group>"; };
+		DD5FA7D627D3C0140086525C /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,10 +105,11 @@
 		DD5FA7B027D396C00086525C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				DD5FA7CC27D3B5EB0086525C /* CommonUI */,
-				DD5FA7B427D3AA280086525C /* FeatureModule.swift */,
 				DD5FA7B527D3AA280086525C /* Router.swift */,
+				DD5FA7B427D3AA280086525C /* FeatureModule.swift */,
+				DD5FA7CC27D3B5EB0086525C /* CommonUI */,
 				DD5FA7B127D396CC0086525C /* NewsList */,
+				DD5FA7D627D3C0140086525C /* BaseViewModel.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				DD5FA7CD27D3B6060086525C /* NewsRowConfiguration.swift */,
+				DD5FA7D427D3BD8D0086525C /* HoleRowConfiguration.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -223,10 +229,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5FA7D527D3BD8D0086525C /* HoleRowConfiguration.swift in Sources */,
 				DD5FA7B627D3AA280086525C /* FeatureModule.swift in Sources */,
 				DD5FA7B927D3AA3A0086525C /* NewListModule.swift in Sources */,
 				DD5FA7C227D3AEB00086525C /* Loadable.swift in Sources */,
 				DD5FA7BD27D3AAD70086525C /* NewListViewModel.swift in Sources */,
+				DD5FA7D727D3C0140086525C /* BaseViewModel.swift in Sources */,
 				DD5FA7BB27D3AABC0086525C /* NewsListViewController.swift in Sources */,
 				DD5FA7B727D3AA280086525C /* Router.swift in Sources */,
 				DD5FA7BF27D3AB060086525C /* NewsListRouter.swift in Sources */,
