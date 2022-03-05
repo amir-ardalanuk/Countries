@@ -7,14 +7,16 @@
 
 import Foundation
 import UIKit
+import Combine
 
 fileprivate enum Layout {
     static let rowHeight: CGFloat = 70.0
 }
 class NewsListViewController: UIViewController {
     // MARK: - Properties
-    let viewModel: NewsListViewModelProtocol
-    let router: NewsListRouting
+    private var cancellable = Set<AnyCancellable>()
+    private let viewModel: NewsListViewModelProtocol
+    private let router: NewsListRouting
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -23,7 +25,8 @@ class NewsListViewController: UIViewController {
         tableView.contentInsetAdjustmentBehavior = .never
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = Layout.rowHeight
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = Layout.rowHeight
         tableView.separatorStyle = .none
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: String(describing: UITableViewCell.self))
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +43,11 @@ class NewsListViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bind()
     }
     
     // MARK: - SetupView
@@ -61,7 +69,14 @@ class NewsListViewController: UIViewController {
     
     // MARK: - bind ViewModel
     private func bind() {
-        
+        viewModel.state
+            .map(\.newsList.value)
+            .replaceError(with: [])
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.tableView.reloadData()
+            }.store(in: &cancellable)
+
     }
 }
 
@@ -76,7 +91,7 @@ extension NewsListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
         cell.contentConfiguration = viewModel.map(item: values[indexPath.row])
-        return UITableViewCell()
+        return cell
     }  
 }
 

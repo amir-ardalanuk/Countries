@@ -28,7 +28,7 @@ struct HoleRowConfiguration: UIContentConfiguration {
 }
 
 class HoleRowView: UIView, UIContentView {
-    // MARK: - Views
+    // MARK: - ViewstableView.rowHeight = UITableView.automaticDimension
     private var cancellables = Set<AnyCancellable>()
     private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()

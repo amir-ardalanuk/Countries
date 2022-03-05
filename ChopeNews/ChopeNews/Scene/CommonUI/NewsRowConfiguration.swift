@@ -11,8 +11,7 @@ import Combine
 import Kingfisher
 
 fileprivate enum Layout {
-    static let logoImageSize = CGSize(width: 48.0, height: 48.0)
-    static let buyViewSize = CGSize(width: 96.0, height: 32.0)
+    static let logoImageSize = CGSize(width: 60, height: 60)
     static let padding: CGFloat = 16.0
 }
 
@@ -53,6 +52,17 @@ class NewsRowView: UIView, UIContentView {
         return stackView
     }()
     
+    private lazy var titleTextsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 8
+        stackView.alignment = .leading
+        stackView.distribution = .fill
+        stackView.axis = .horizontal
+        stackView.semanticContentAttribute = .forceRightToLeft
+        return stackView
+    }()
+    
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -64,6 +74,17 @@ class NewsRowView: UIView, UIContentView {
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textAlignment = .center
         label.textColor = .darkGray
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    private lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textAlignment = .center
+        label.textColor = .darkGray
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
         return label
     }()
     
@@ -72,6 +93,7 @@ class NewsRowView: UIView, UIContentView {
         label.font = .systemFont(ofSize: 12)
         label.textAlignment = .center
         label.textColor = .gray
+        label.numberOfLines = 2
         return label
     }()
     
@@ -101,7 +123,8 @@ class NewsRowView: UIView, UIContentView {
     private func setupView() {
         addSubview(mainStackView)
         [logoImageView, textsStackView].forEach(mainStackView.addArrangedSubview(_:))
-        [titleLabel, descriptionLabel].forEach(textsStackView.addArrangedSubview(_:))
+        [titleLabel, timeLabel].forEach(titleTextsStackView.addArrangedSubview(_:))
+        [titleTextsStackView, descriptionLabel].forEach(textsStackView.addArrangedSubview(_:))
         setupConstraint()
     }
     
@@ -123,7 +146,8 @@ class NewsRowView: UIView, UIContentView {
     private func configView() {
         guard let newsConfig = newsRowConfiguration else { return }
         titleLabel.text = newsConfig.news.title
-        descriptionLabel.text = newsConfig.news.publishedAt.ISO8601Format()
+        timeLabel.text = newsConfig.news.publishedAt.formatted()
+        descriptionLabel.text = newsConfig.news.description
         if let urlString = newsConfig.news.image, let url = URL(string: urlString) {
             logoImageView.kf.setImage(with: url)
         }

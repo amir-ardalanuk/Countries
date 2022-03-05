@@ -18,7 +18,7 @@ protocol LoadableProtocol {
     
 }
 
-public enum Loadable<T>: LoadableProtocol {
+public enum Loadable<T: Hashable>: LoadableProtocol {
     
     case notRequested
     case isLoading(last: T?)

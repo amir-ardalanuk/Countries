@@ -20,7 +20,7 @@ struct NewsListViewModelState {
 
 
 extension NewsListViewModelState {
-    enum Item {
+    enum Item: Hashable {
         case news(News)
         case hole(Int?)
     }
@@ -78,6 +78,7 @@ final class NewsListViewModel: NewsListViewModelProtocol {
     }
     
     private func fetchNews(page: Int?) {
+        return
         newsUsecase.fetchNews(page: page)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
