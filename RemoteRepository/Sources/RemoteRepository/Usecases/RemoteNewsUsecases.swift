@@ -20,7 +20,11 @@ public class RemoteNewsUsecase: RemoteNewsUsecasesProtocol {
     
     public func fetchNews(page: Int?) -> AnyPublisher<[News], NewsUsecaseError> {
         // FIXME: It's better to use wrraper for making request somthing like Moya
-        guard let endpointUrl = URL(string: "https://restcountries.com/v3.1/all") else {
+        var urlComponent = URLComponents(string: MediStack.news.path)
+        urlComponent?.queryItems = [
+            URLQueryItem(name: "access_key", value: MediStack.accessKey)
+        ]
+        guard let endpointUrl = urlComponent?.url else {
             fatalError("URL is not correct")
         }
         let request = URLRequest(url: endpointUrl)
