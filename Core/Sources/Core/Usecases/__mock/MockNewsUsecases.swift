@@ -13,9 +13,9 @@ import Combine
 public final class MockNewsUseCases: NewsUsecase {
     public init() {}
     
-    public var resultProvider: (() -> Result<[News], NewsUsecaseError>)?
+    public var resultProvider: (() -> Result<NewsResult, NewsUsecaseError>)?
     
-    public func fetchNews(page: Int?) -> AnyPublisher<[News], NewsUsecaseError> {
+    public func fetchNews(offset: Int, limit: Int) -> AnyPublisher<NewsResult, NewsUsecaseError> {
         if let result = resultProvider?() {
             return result.publisher.eraseToAnyPublisher()
         }

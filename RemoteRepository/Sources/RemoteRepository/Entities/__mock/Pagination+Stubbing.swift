@@ -10,10 +10,10 @@ import Foundation
 
 extension Pagination {
     static func stub(
-        limit: Int?,
-        offset: Int?,
-        count: Int?,
-        total: Int?
+        total: Int,
+        offset: Int,
+        limit: Int,
+        count: Int
     ) -> Self {
         .init(limit: limit, offset: offset, count: count, total: total)
     }

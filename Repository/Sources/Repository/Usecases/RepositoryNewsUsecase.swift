@@ -11,15 +11,17 @@ import Combine
 import RemoteRepository
 
 public class RepositoryNewsUsecase: NewsUsecase {
+
+
     
     let remoteUsecases: RemoteNewsUsecasesProtocol
     
     public init(remoteUsecases: RemoteNewsUsecasesProtocol) {
         self.remoteUsecases = remoteUsecases
     }
-    
-    public func fetchNews(page: Int?) -> AnyPublisher<[News], NewsUsecaseError> {
+
+    public func fetchNews(offset: Int, limit: Int) -> AnyPublisher<NewsResult, NewsUsecaseError> {
         // FIXME: Could be added `LocalUsecases` or decide to bring data from local/cache or load from remote
-        remoteUsecases.fetchNews(page: page)
+        remoteUsecases.fetchNews(offset: offset, limit: limit)
     }
 }

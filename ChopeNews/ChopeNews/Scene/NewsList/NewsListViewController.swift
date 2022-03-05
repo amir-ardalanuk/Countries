@@ -107,6 +107,7 @@ fileprivate extension NewsListViewModelProtocol {
         case let .hole(page):
             let config = HoleRowConfiguration(page: page)
             config.load.sink { [weak self] page in
+                guard let page = page else { return }
                 self?.action(.fetchPage(page))
             }.store(in: &cancellables)
             return config

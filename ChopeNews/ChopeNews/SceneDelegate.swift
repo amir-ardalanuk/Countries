@@ -19,12 +19,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         /// Prepare dependencies
-        let httpClient = DefaultHTTPClient(urlSession: URLSession.shared)
+         let configuration = URLSessionConfiguration.default
+        let cache = URLCache(memoryCapacity: 500_000_000,
+                               diskCapacity: 1_000_000_000)
+        configuration.urlCache = cache
+        let httpClient = DefaultHTTPClient(urlSession: URLSession(configuration: configuration))
         let remoteRepository = RemoteNewsUsecase(client: httpClient)
         let newsUsecases = RepositoryNewsUsecase(remoteUsecases: remoteRepository)
         /// Prepare root view's
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = NewsListModule().makeScene(configuration: .init(apiKey: "", newsUsecases: newsUsecases))
+        let mainTabBar = UITabBarController()
+        let newsList = NewsListModule().makeScene(configuration: .init(apiKey: "", newsUsecases: newsUsecases))
+        mainTabBar.viewControllers = [ UINavigationController(rootViewController: newsList)]
+        window.rootViewController = mainTabBar
         self.window = window
         window.makeKeyAndVisible()
     }

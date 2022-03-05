@@ -14,6 +14,6 @@ public enum NewsUsecaseError: Error {
 }
 
 public protocol NewsUsecase {
-    
-    func fetchNews(page: Int?) -> AnyPublisher<[News], NewsUsecaseError>
+    typealias NewsResult = (list: [News], nextPage: Int?)
+    func fetchNews(offset: Int, limit: Int) -> AnyPublisher<NewsResult, NewsUsecaseError>
 }

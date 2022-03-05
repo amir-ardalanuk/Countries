@@ -11,7 +11,7 @@ import Combine
 import Kingfisher
 
 fileprivate enum Layout {
-    static let logoImageSize = CGSize(width: 60, height: 60)
+    static let logoImageSize = CGSize(width: 80, height: 80)
     static let padding: CGFloat = 16.0
 }
 
@@ -30,14 +30,19 @@ struct NewsRowConfiguration: UIContentConfiguration {
 class NewsRowView: UIView, UIContentView {
     // MARK: - Views
     private var cancellables = Set<AnyCancellable>()
+    private lazy var dateFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "YY/MM/dd"
+        return dateFormatter
+    }()
+
     private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 12
-        stackView.alignment = .center
+        stackView.alignment = .top
         stackView.distribution = .fill
         stackView.axis = .horizontal
-        stackView.semanticContentAttribute = .forceRightToLeft
         return stackView
     }()
     
@@ -48,7 +53,6 @@ class NewsRowView: UIView, UIContentView {
         stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.axis = .vertical
-        stackView.semanticContentAttribute = .forceRightToLeft
         return stackView
     }()
     
@@ -59,29 +63,28 @@ class NewsRowView: UIView, UIContentView {
         stackView.alignment = .leading
         stackView.distribution = .fill
         stackView.axis = .horizontal
-        stackView.semanticContentAttribute = .forceRightToLeft
         return stackView
     }()
     
     private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleToFill
+        imageView.layer.cornerRadius = 8
+        imageView.clipsToBounds = true
         return imageView
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.textAlignment = .center
         label.textColor = .darkGray
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         return label
     }()
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 12)
-        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 9)
         label.textColor = .darkGray
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -91,7 +94,6 @@ class NewsRowView: UIView, UIContentView {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
-        label.textAlignment = .center
         label.textColor = .gray
         label.numberOfLines = 2
         return label
@@ -130,9 +132,9 @@ class NewsRowView: UIView, UIContentView {
     
     private func setupConstraint() {
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: topAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: Layout.padding),
+            mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Layout.padding),
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Layout.padding),
             mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Layout.padding)
         ])
         
@@ -144,9 +146,10 @@ class NewsRowView: UIView, UIContentView {
     // MARK: - fetch Config on View
     
     private func configView() {
+        logoImageView.image = nil
         guard let newsConfig = newsRowConfiguration else { return }
         titleLabel.text = newsConfig.news.title
-        timeLabel.text = newsConfig.news.publishedAt.formatted()
+        timeLabel.text = dateFormatter.string(from: newsConfig.news.publishedAt)
         descriptionLabel.text = newsConfig.news.description
         if let urlString = newsConfig.news.image, let url = URL(string: urlString) {
             logoImageView.kf.setImage(with: url)

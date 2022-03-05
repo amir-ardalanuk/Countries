@@ -18,18 +18,23 @@ public class RemoteNewsUsecase: RemoteNewsUsecasesProtocol {
         self.client = client
     }
     
-    public func fetchNews(page: Int?) -> AnyPublisher<[News], NewsUsecaseError> {
+    public func fetchNews(offset: Int, limit: Int) -> AnyPublisher<NewsResult, NewsUsecaseError> {
         // FIXME: It's better to use wrraper for making request somthing like Moya
         var urlComponent = URLComponents(string: MediStack.news.path)
         urlComponent?.queryItems = [
-            URLQueryItem(name: "access_key", value: MediStack.accessKey)
+            URLQueryItem(name: "access_key", value: MediStack.accessKey),
+            URLQueryItem(name: "languages", value: "en"),
+            URLQueryItem(name: "offset", value: "\(offset)"),
+            URLQueryItem(name: "limit", value: "\(limit)"),
         ]
         guard let endpointUrl = urlComponent?.url else {
             fatalError("URL is not correct")
         }
         let request = URLRequest(url: endpointUrl)
         return client.request(request)
-            .tryMap {  try News.map(data: $0.0, response: $0.1) }
+            .tryMap {
+                try Self.map(data: $0.0, response: $0.1)
+            }
             .mapError { error in
                 switch error {
                 case let usecaseError as NewsUsecaseError:
@@ -42,8 +47,8 @@ public class RemoteNewsUsecase: RemoteNewsUsecasesProtocol {
     }
 }
 
-private extension News {
-    static func map(data: Data?, response: URLResponse?) throws -> [News] {
+private extension NewsUsecase {
+    static func map(data: Data?, response: URLResponse?) throws -> NewsResult {
         guard let httpResponse = response as? HTTPURLResponse, let data = data else {
             throw NewsUsecaseError.invalidData(nil)
         }
@@ -55,11 +60,24 @@ private extension News {
         
         let newsResponse = try JSONDecoder().decode(NewsResponse.self, from: data)
         let dateFormatter = DateFormatter()
-        /// 2021-12-07T22:58:00+00: 00
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+ 'HH:mm"
-        return newsResponse.data?.map { item -> News in
+        let newsList = newsResponse.data?.map { item -> News in
             let date: Date = dateFormatter.date(from: item.publishedAt) ?? Date()
-            return News.init(author: item.author, title: item.title, description: item.description, url: item.url, source: item.source, image: item.image, category: item.category, language: item.language, country: item.country, publishedAt:  date)
+            return News(
+                author: item.author,
+                title: item.title,
+                description: item.description,
+                url: item.url,
+                source: item.source,
+                image: item.image,
+                category: item.category,
+                language: item.language,
+                country: item.country,
+                publishedAt:  date
+            )
         } ?? []
+
+        let nextPage = newsResponse.pagination.flatMap { ($0.offset + $0.count) <= $0.total ? $0.offset + $0.count : nil }
+        return NewsResult(list: newsList, nextPage: nextPage)
     }
 }

@@ -8,10 +8,10 @@
 import Foundation
 
 struct Pagination : Decodable {
-    let limit : Int?
-    let offset : Int?
-    let count : Int?
-    let total : Int?
+    let limit : Int
+    let offset : Int
+    let count : Int
+    let total : Int
 
     enum CodingKeys: String, CodingKey {
         case limit = "limit"

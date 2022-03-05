@@ -11,7 +11,7 @@ import Core
 import Combine
 
 fileprivate enum Layout {
-    static let padding: CGFloat = 16.0
+    static let padding: CGFloat = 8.0
 }
 
 struct HoleRowConfiguration: UIContentConfiguration {
@@ -30,7 +30,7 @@ struct HoleRowConfiguration: UIContentConfiguration {
 class HoleRowView: UIView, UIContentView {
     // MARK: - ViewstableView.rowHeight = UITableView.automaticDimension
     private var cancellables = Set<AnyCancellable>()
-    private lazy var mainStackView: UIStackView = {
+    private lazy var container: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = 12
@@ -72,17 +72,16 @@ class HoleRowView: UIView, UIContentView {
     
     // MARK: - SetupView
     private func setupView() {
-        addSubview(mainStackView)
-        [activityIndicator].forEach(mainStackView.addArrangedSubview(_:))
+        addSubview(activityIndicator)
         setupConstraint()
     }
     
     private func setupConstraint() {
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: topAnchor),
-            mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Layout.padding)
+            activityIndicator.topAnchor.constraint(equalTo: topAnchor, constant: Layout.padding),
+            activityIndicator.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Layout.padding),
+            activityIndicator.leadingAnchor.constraint(equalTo: leadingAnchor),
+            activityIndicator.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
     // MARK: - fetch Config on View
