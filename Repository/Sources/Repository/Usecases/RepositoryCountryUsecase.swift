@@ -7,6 +7,7 @@
 
 import Foundation
 import Core
+import Combine
 
 public class RepositoryCountryUsecase: CountryUsecase {
     let remoteUsecases: CountryUsecase
@@ -15,8 +16,8 @@ public class RepositoryCountryUsecase: CountryUsecase {
         self.remoteUsecases = remoteUsecases
     }
     
-    public func fetchCountryList(completion: @escaping CountryListCompletion) {
-        //FIXME: Could be added `LocalUsecases` or decide to bring data from local/cache or load from remote
-        self.remoteUsecases.fetchCountryList(completion: completion)
+    public func fetchCountryList() -> AnyPublisher<[Country], CountryUsecaseError> {
+        // FIXME: Could be added `LocalUsecases` or decide to bring data from local/cache or load from remote
+        remoteUsecases.fetchCountryList()
     }
 }

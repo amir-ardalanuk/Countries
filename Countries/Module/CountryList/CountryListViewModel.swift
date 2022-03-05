@@ -11,6 +11,7 @@ import Core
 
 class CountryListViewModel: CountryListViewModelProtocol {
     //MARK: - Properties
+    private var cancellabe = Set<AnyCancellable>()
     private var countriesCach = [Country]()
     private var countryUsecase: CountryUsecase
     private var configuration: CountryList.Configuration
@@ -96,17 +97,20 @@ class CountryListViewModel: CountryListViewModelProtocol {
     
     private func fetchCountryList() {
         state.value = state.value.update(loading: true)
-        countryUsecase.fetchCountryList { [weak self] result in
-            switch result {
-            case let .success(values):
-                DispatchQueue.main.async { [weak self] in
-                    self?.countriesCach = values
-                    self?.handel(action: .updateCountryList(values))
+        countryUsecase.fetchCountryList()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case let .failure(error):
+                    // FIXME: assign to the error message
+                    print(error)
                 }
-            case let .failure(error):
-                print(error)
-            }
-        }
+            } receiveValue: { [weak self] countryList in
+                self?.countriesCach = countryList
+                self?.handel(action: .updateCountryList(countryList))
+            }.store(in: &cancellabe)
     }
     
 }

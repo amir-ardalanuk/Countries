@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 public enum CountryUsecaseError: Error {
     case invalidData(Error?)
@@ -14,7 +15,5 @@ public enum CountryUsecaseError: Error {
 
 public protocol CountryUsecase {
     
-    typealias CountryListCompletion = ((Result<[Country], CountryUsecaseError>) -> ())
-    
-    func fetchCountryList(completion: @escaping CountryListCompletion)
+    func fetchCountryList() -> AnyPublisher<[Country], CountryUsecaseError>
 }

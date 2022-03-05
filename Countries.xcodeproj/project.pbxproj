@@ -150,12 +150,12 @@
 		8B4B27C427A5E40F00C06EB8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8B4B27DA27A6863300C06EB8 /* HomeRoute.swift */,
+				8B4B27BE27A5D18F00C06EB8 /* HomeViewController.swift */,
+				8B7D5F9B27C77D0A00ECAEFB /* HomeModule.swift */,
 				DDFDD5F227CBD709005A9A4E /* ViewModel */,
 				DDFDD5F127CBD6F6005A9A4E /* Datasource */,
 				8B6DCE0327A6AD6D00413FBA /* Cell */,
-				8B4B27BE27A5D18F00C06EB8 /* HomeViewController.swift */,
-				8B4B27DA27A6863300C06EB8 /* HomeRoute.swift */,
-				8B7D5F9B27C77D0A00ECAEFB /* HomeModule.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

@@ -8,30 +8,31 @@
 import Foundation
 import Core
 import HTTPClient
+import Combine
 
 public class RemoteCountryListUsecases: CountryUsecase {
+    
     private let client: HTTPClient
     public init(client: HTTPClient) {
         self.client = client
     }
     
-    
-    public func fetchCountryList(completion: @escaping (Result<[Country], CountryUsecaseError>) -> ()) {
+    public func fetchCountryList() -> AnyPublisher<[Country], CountryUsecaseError> {
         guard let endpointUrl = URL(string: "https://restcountries.com/v3.1/all") else {
             fatalError("URL is not correct")
         }
         let request = URLRequest(url: endpointUrl)
-        self.client.request(request) { data, response, error in
-            if let error = error {
-                completion(.failure(.networkError(error)))
-            } else {
-                do {
-                    completion(.success(try CountryItemsMapper.map(data: data, response: response)))
-                } catch {
-                    completion(.failure(.invalidData(error)))
+        return client.request(request)
+            .tryMap {  try CountryItemsMapper.map(data: $0.0, response: $0.1) }
+            .mapError { error in
+                switch error {
+                case let usecaseError as CountryUsecaseError:
+                    return usecaseError
+                default:
+                    return CountryUsecaseError.networkError(error)
                 }
-            }
-        }
+                
+            }.eraseToAnyPublisher()
     }
 }
 

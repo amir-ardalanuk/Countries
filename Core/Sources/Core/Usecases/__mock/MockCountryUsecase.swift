@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 public final class MockCountryListUsecases: CountryUsecase {
 
@@ -14,11 +15,11 @@ public final class MockCountryListUsecases: CountryUsecase {
     
     public var resultProvider: (() -> Result<[Country], CountryUsecaseError>)?
     
-    public func fetchCountryList(completion: @escaping CountryListCompletion) {
+    public func fetchCountryList() -> AnyPublisher<[Country], CountryUsecaseError> {
         if let result = resultProvider?() {
-            completion(result)
+            return result.publisher.eraseToAnyPublisher()
         }
-        completion(.success([.stub()]))
+        fatalError("No implemented result Provider")
     }
 
 }
