@@ -10,7 +10,9 @@ import Core
 import HTTPClient
 import Combine
 
-public class RemoteNewsUsecase: NewsUsecase {
+public protocol RemoteNewsUsecasesProtocol: NewsUsecase { }
+
+public class RemoteNewsUsecase: RemoteNewsUsecasesProtocol {
     private let client: HTTPClient
     public init(client: HTTPClient) {
         self.client = client
