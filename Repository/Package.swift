@@ -15,6 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "Core", path: "../Core"),
+        .package(name: "LocalStorage", path: "../LocalStorage")
     ],
     targets: [
         .target(

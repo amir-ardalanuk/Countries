@@ -31,6 +31,7 @@
 		DD5FA7DE27D493790086525C /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DD27D493790086525C /* NewsDetailViewModel.swift */; };
 		DD5FA7E027D493840086525C /* NewsDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */; };
 		DD5FA7E227D4AB6D0086525C /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7E127D4AB6D0086525C /* Date+Extension.swift */; };
+		DD5FA7E627D4FDFC0086525C /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DD5FA7E527D4FDFC0086525C /* LocalStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD5FA7E627D4FDFC0086525C /* LocalStorage in Frameworks */,
 				DD5FA7C527D3B55C0086525C /* Core in Frameworks */,
 				DD5FA7C727D3B55C0086525C /* HTTPClient in Frameworks */,
 				DD5FA7CB27D3B55C0086525C /* Repository in Frameworks */,
@@ -194,6 +196,7 @@
 				DD5FA7C827D3B55C0086525C /* RemoteRepository */,
 				DD5FA7CA27D3B55C0086525C /* Repository */,
 				DD5FA7D027D3B8520086525C /* Kingfisher */,
+				DD5FA7E527D4FDFC0086525C /* LocalStorage */,
 			);
 			productName = ChopeNews;
 			productReference = DD5FA79827D3968F0086525C /* ChopeNews.app */;
@@ -509,6 +512,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DD5FA7CF27D3B8520086525C /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		DD5FA7E527D4FDFC0086525C /* LocalStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LocalStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

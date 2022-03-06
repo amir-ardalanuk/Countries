@@ -10,6 +10,7 @@ import Core
 import HTTPClient
 import RemoteRepository
 import Repository
+import LocalStorage
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -25,7 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configuration.urlCache = cache
         let httpClient = DefaultHTTPClient(urlSession: URLSession(configuration: configuration))
         let remoteRepository = RemoteNewsUsecase(client: httpClient)
-        let newsUsecases = RepositoryNewsUsecase(remoteUsecases: remoteRepository)
+        let localStore = LocalNewsFavoriteUsecase()
+        let newsUsecases = RepositoryNewsUsecase(remoteUsecases: remoteRepository, favoriteUsecases: localStore)
         /// Prepare root view's
         let window = UIWindow(windowScene: windowScene)
         let mainTabBar = UITabBarController()

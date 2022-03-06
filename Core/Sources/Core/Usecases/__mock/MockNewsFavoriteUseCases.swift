@@ -37,8 +37,8 @@ public final class MockNewsFavoriteUseCases: NewsFavoriteUsecase {
         fatalError("No implemented result Provider")
     }
     
-    public var isFavoriteResultProvider: ((News) -> Result<Void, NewsFavoriteUsecaseError>)?
-    public func isFavorite(news: News) -> AnyPublisher<Void, NewsFavoriteUsecaseError> {
+    public var isFavoriteResultProvider: ((News) -> Result<Bool, NewsFavoriteUsecaseError>)?
+    public func isFavorite(news: News) -> AnyPublisher<Bool, NewsFavoriteUsecaseError> {
         if let result = isFavoriteResultProvider?(news) {
             return result.publisher.eraseToAnyPublisher()
         }
