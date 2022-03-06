@@ -16,7 +16,12 @@ protocol NewsListViewModelProtocol: BaseViewModel {
 
 struct NewsListViewModelState {
     let newsList: Loadable<[Item]>
-    let routeAction: RouteAction? = nil
+    let routeAction: RouteAction?
+    
+    private init(newsList: Loadable<[NewsListViewModelState.Item]>, route: RouteAction? = nil) {
+        self.newsList = newsList
+        self.routeAction = route
+    }
 }
 
 
@@ -27,7 +32,11 @@ extension NewsListViewModelState {
     }
     
     func update(_ list: Loadable<[Item]>) -> Self {
-        return .init(newsList: list)
+        .init(newsList: list)
+    }
+    
+    func update(route: RouteAction) -> Self {
+        .init(newsList: self.newsList, route: route)
     }
     
     static var initialState: Self {
@@ -88,6 +97,9 @@ final class NewsListViewModel: NewsListViewModelProtocol {
             let list: [NewsListViewModelState.Item] = data.map { .news($0)}
             let hole: [NewsListViewModelState.Item] = nextPage.flatMap { [.hole($0)] } ?? []
             state.value = state.value.update(.loaded( currentList +  list + hole ))
+        case let .didSelectNews(_, news):
+            let configuration = NewsDetail.Configuration(news: news)
+            state.value = state.value.update(route: .openNewsDetail(configuration))
         }
     }
     

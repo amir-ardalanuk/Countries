@@ -76,6 +76,17 @@ class NewsListViewController: UIViewController {
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
             }.store(in: &cancellable)
+        
+        viewModel.state
+            .map(\.routeAction)
+            .replaceError(with: nil)
+            .compactMap { $0 }
+            .sink { [weak self] route in
+                switch route {
+                case let .openNewsDetail(config):
+                    self?.router.openNewsDetail(configuration: config)
+                }
+            }.store(in: &cancellable)
 
     }
 }
