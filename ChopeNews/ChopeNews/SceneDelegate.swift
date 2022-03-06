@@ -27,11 +27,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let httpClient = DefaultHTTPClient(urlSession: URLSession(configuration: configuration))
         let remoteRepository = RemoteNewsUsecase(client: httpClient)
         let localStore = LocalNewsFavoriteUsecase()
-        let newsUsecases = RepositoryNewsUsecase(remoteUsecases: remoteRepository, favoriteUsecases: localStore)
+        let repository = RepositoryNewsUsecase(remoteUsecases: remoteRepository, favoriteUsecases: localStore)
         /// Prepare root view's
         let window = UIWindow(windowScene: windowScene)
         let mainTabBar = UITabBarController()
-        let newsList = NewsListModule().makeScene(configuration: .init(apiKey: "", newsUsecases: newsUsecases))
+        let newsList = NewsListModule().makeScene(configuration: .init(apiKey: "", newsUsecases: repository, favoriteUsecases: repository))
         mainTabBar.viewControllers = [ UINavigationController(rootViewController: newsList)]
         window.rootViewController = mainTabBar
         self.window = window

@@ -9,10 +9,7 @@ import Foundation
 import Core
 
 extension News: Codable {
-    public func encode(to encoder: Encoder) throws {
-        
-    }
-    
+
     enum CodingKeys: String, CodingKey {
         case author = "author"
         case title = "title"
@@ -42,6 +39,19 @@ extension News: Codable {
         self.init(author: author, title: title, description: description, url: url, source: source, image: image, category: category, language: language, country: country, publishedAt: publishDate)
         
     }
-    
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(description, forKey: .description)
+        try container.encode(url, forKey: .url)
+        try container.encode(source, forKey: .source)
+        try container.encode(publishedAt.makeServerData(), forKey: .published_at)
+        author.flatMap { try? container.encode($0, forKey: .author) }
+        title.flatMap { try? container.encode($0, forKey: .title) }
+        image.flatMap { try? container.encode($0, forKey: .image) }
+        category.flatMap { try? container.encode($0, forKey: .category) }
+        language.flatMap { try? container.encode($0, forKey: .language) }
+        country.flatMap { try? container.encode($0, forKey: .country) }   
+    }
     
 }

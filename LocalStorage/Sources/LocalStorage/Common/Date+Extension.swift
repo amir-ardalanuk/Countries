@@ -6,7 +6,8 @@
 //
 
 import Foundation
-let serverDateFormatter : DateFormatter = {
+
+fileprivate let serverDateFormatter : DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'+ 'HH:mm"
     return formatter
@@ -19,6 +20,10 @@ extension Date {
             throw NSError(domain: "DateString not in a correct format", code: -100)
         }
         return _date
+    }
+    
+    func makeServerData()  -> String {
+        return serverDateFormatter.string(from: self)
     }
 }
 

@@ -12,6 +12,7 @@ enum NewsList {
     struct Configuration {
         let apiKey: String
         let newsUsecases: NewsUsecase
+        let favoriteUsecases: NewsFavoriteUsecase
     }
 }
 

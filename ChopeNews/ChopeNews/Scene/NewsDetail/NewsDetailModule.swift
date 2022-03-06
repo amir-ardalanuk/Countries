@@ -12,6 +12,7 @@ import Core
 struct NewsDetail {
     struct Configuration {
         let news: News
+        let favoriteUsecases: NewsFavoriteUsecase
     }
 }
 

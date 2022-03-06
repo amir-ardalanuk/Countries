@@ -2,13 +2,13 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:LocalStorage">
-   </FileRef>
-   <FileRef
       location = "group:ChopeNews/ChopeNews.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Repository">
+   </FileRef>
+   <FileRef
+      location = "group:LocalStorage">
    </FileRef>
    <FileRef
       location = "group:RemoteRepository">

@@ -48,6 +48,10 @@ public class LocalNewsFavoriteUsecase: LocalNewsFavoriteUsecasesProtocol {
         return Deferred {
             Future<[News], NewsFavoriteUsecaseError> { [weak self] promise in
                 guard let self = self else { return }
+                guard self.isAvailableData(forKey: self.newsKey) else {
+                    promise(.success([]))
+                    return
+                }
                 self.storage.fetch(forKey: self.newsKey) { (result: Result<[News], StorageError>) in
                     switch result {
                     case let .success(data):

@@ -62,6 +62,7 @@ final class NewsListViewModel: NewsListViewModelProtocol {
     // MARK: - Properties
     private let limit = 25
     private let newsUsecase: NewsUsecase
+    private let configuration: NewsList.Configuration
     var cancellables = Set<AnyCancellable>() {
         didSet {
             print(" ===== > CANCELLABLES")
@@ -73,6 +74,7 @@ final class NewsListViewModel: NewsListViewModelProtocol {
     
     // MARK: - Initialization
     init(configuration: NewsList.Configuration) {
+        self.configuration = configuration
         state = .init(.initialState)
         newsUsecase = configuration.newsUsecases
     }
@@ -98,7 +100,7 @@ final class NewsListViewModel: NewsListViewModelProtocol {
             let hole: [NewsListViewModelState.Item] = nextPage.flatMap { [.hole($0)] } ?? []
             state.value = state.value.update(.loaded( currentList +  list + hole ))
         case let .didSelectNews(_, news):
-            let configuration = NewsDetail.Configuration(news: news)
+            let configuration = NewsDetail.Configuration(news: news, favoriteUsecases: configuration.favoriteUsecases)
             state.value = state.value.update(route: .openNewsDetail(configuration))
         }
     }

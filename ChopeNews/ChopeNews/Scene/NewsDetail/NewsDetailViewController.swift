@@ -129,6 +129,12 @@ final class NewsDetailViewController: UIViewController {
             .sink { [weak self] date in
                 self?.timeLabel.text = date.fullDateString
             }.store(in: &cancellables)
+        
+        viewModel.state
+            .map(\.isFav)
+            .sink { [weak self] isFav in
+                self?.saveBarButtonItem.image = UIImage(systemName: isFav ? Constant.savedImageName : Constant.saveImageName)
+            }.store(in: &cancellables)
     }
     
     // MARK: - SetupView
@@ -148,8 +154,7 @@ final class NewsDetailViewController: UIViewController {
     }
     
     @objc private func didTapOnSave() {
-        print("save")
-        saveBarButtonItem.image = UIImage(systemName: Constant.savedImageName)
+        viewModel.action(.updateFavorite)
     }
     
     private func setupConstraint() {
