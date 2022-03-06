@@ -26,6 +26,10 @@
 		DD5FA7D127D3B8520086525C /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DD5FA7D027D3B8520086525C /* Kingfisher */; };
 		DD5FA7D527D3BD8D0086525C /* HoleRowConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7D427D3BD8D0086525C /* HoleRowConfiguration.swift */; };
 		DD5FA7D727D3C0140086525C /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7D627D3C0140086525C /* BaseViewModel.swift */; };
+		DD5FA7DA27D493040086525C /* NewsDetailModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7D927D493040086525C /* NewsDetailModule.swift */; };
+		DD5FA7DC27D493700086525C /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DB27D493700086525C /* NewsDetailViewController.swift */; };
+		DD5FA7DE27D493790086525C /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DD27D493790086525C /* NewsDetailViewModel.swift */; };
+		DD5FA7E027D493840086525C /* NewsDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +49,10 @@
 		DD5FA7CD27D3B6060086525C /* NewsRowConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRowConfiguration.swift; sourceTree = "<group>"; };
 		DD5FA7D427D3BD8D0086525C /* HoleRowConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleRowConfiguration.swift; sourceTree = "<group>"; };
 		DD5FA7D627D3C0140086525C /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		DD5FA7D927D493040086525C /* NewsDetailModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailModule.swift; sourceTree = "<group>"; };
+		DD5FA7DB27D493700086525C /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
+		DD5FA7DD27D493790086525C /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
+		DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +115,7 @@
 			children = (
 				DD5FA7B527D3AA280086525C /* Router.swift */,
 				DD5FA7B427D3AA280086525C /* FeatureModule.swift */,
+				DD5FA7D827D492EF0086525C /* NewsDetail */,
 				DD5FA7CC27D3B5EB0086525C /* CommonUI */,
 				DD5FA7B127D396CC0086525C /* NewsList */,
 				DD5FA7D627D3C0140086525C /* BaseViewModel.swift */,
@@ -147,6 +156,17 @@
 				DD5FA7D427D3BD8D0086525C /* HoleRowConfiguration.swift */,
 			);
 			path = CommonUI;
+			sourceTree = "<group>";
+		};
+		DD5FA7D827D492EF0086525C /* NewsDetail */ = {
+			isa = PBXGroup;
+			children = (
+				DD5FA7D927D493040086525C /* NewsDetailModule.swift */,
+				DD5FA7DB27D493700086525C /* NewsDetailViewController.swift */,
+				DD5FA7DD27D493790086525C /* NewsDetailViewModel.swift */,
+				DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */,
+			);
+			path = NewsDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,14 +251,18 @@
 			files = (
 				DD5FA7D527D3BD8D0086525C /* HoleRowConfiguration.swift in Sources */,
 				DD5FA7B627D3AA280086525C /* FeatureModule.swift in Sources */,
+				DD5FA7E027D493840086525C /* NewsDetailRouter.swift in Sources */,
 				DD5FA7B927D3AA3A0086525C /* NewListModule.swift in Sources */,
 				DD5FA7C227D3AEB00086525C /* Loadable.swift in Sources */,
 				DD5FA7BD27D3AAD70086525C /* NewListViewModel.swift in Sources */,
 				DD5FA7D727D3C0140086525C /* BaseViewModel.swift in Sources */,
+				DD5FA7DA27D493040086525C /* NewsDetailModule.swift in Sources */,
 				DD5FA7BB27D3AABC0086525C /* NewsListViewController.swift in Sources */,
 				DD5FA7B727D3AA280086525C /* Router.swift in Sources */,
 				DD5FA7BF27D3AB060086525C /* NewsListRouter.swift in Sources */,
+				DD5FA7DC27D493700086525C /* NewsDetailViewController.swift in Sources */,
 				DD5FA79C27D3968F0086525C /* AppDelegate.swift in Sources */,
+				DD5FA7DE27D493790086525C /* NewsDetailViewModel.swift in Sources */,
 				DD5FA7CE27D3B6060086525C /* NewsRowConfiguration.swift in Sources */,
 				DD5FA79E27D3968F0086525C /* SceneDelegate.swift in Sources */,
 			);
