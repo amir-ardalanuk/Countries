@@ -31,8 +31,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         /// Prepare root view's
         let window = UIWindow(windowScene: windowScene)
         let mainTabBar = UITabBarController()
+        
         let newsList = NewsListModule().makeScene(configuration: .init(apiKey: "", newsUsecases: repository, favoriteUsecases: repository))
-        mainTabBar.viewControllers = [ UINavigationController(rootViewController: newsList)]
+        let favoriteList = FavoriteListModule().makeScene(configuration: .init(favoriteUsecases: repository))
+        
+        mainTabBar.viewControllers = [ UINavigationController(rootViewController: newsList), UINavigationController(rootViewController: favoriteList)]
         window.rootViewController = mainTabBar
         self.window = window
         window.makeKeyAndVisible()
