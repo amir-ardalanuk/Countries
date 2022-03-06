@@ -16,6 +16,7 @@ protocol NewsListViewModelProtocol: BaseViewModel {
 
 struct NewsListViewModelState {
     let newsList: Loadable<[Item]>
+    let routeAction: RouteAction? = nil
 }
 
 
@@ -34,10 +35,15 @@ extension NewsListViewModelState {
     }
 }
 
+enum RouteAction {
+    case openNewsDetail(NewsDetail.Configuration)
+}
+
 enum NewsListViewModelAction {
     case fetchPage(Int)
     case failedFetching(Int?, Error)
     case fetchCompleted(Int?,[News])
+    case didSelectNews(IndexPath, News)
 }
 
 enum NewsListViewModelError: Error { }
