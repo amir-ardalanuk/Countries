@@ -32,6 +32,10 @@
 		DD5FA7E027D493840086525C /* NewsDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */; };
 		DD5FA7E227D4AB6D0086525C /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7E127D4AB6D0086525C /* Date+Extension.swift */; };
 		DD5FA7E627D4FDFC0086525C /* LocalStorage in Frameworks */ = {isa = PBXBuildFile; productRef = DD5FA7E527D4FDFC0086525C /* LocalStorage */; };
+		DD5FA7E927D50D9B0086525C /* FavoriteListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7E827D50D9B0086525C /* FavoriteListModule.swift */; };
+		DD5FA7EB27D50DA60086525C /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7EA27D50DA60086525C /* FavoriteListViewController.swift */; };
+		DD5FA7ED27D50DCF0086525C /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7EC27D50DCF0086525C /* FavoriteListViewModel.swift */; };
+		DD5FA7EF27D50E150086525C /* FavoriteListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7EE27D50E150086525C /* FavoriteListRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +60,10 @@
 		DD5FA7DD27D493790086525C /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
 		DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailRouter.swift; sourceTree = "<group>"; };
 		DD5FA7E127D4AB6D0086525C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		DD5FA7E827D50D9B0086525C /* FavoriteListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListModule.swift; sourceTree = "<group>"; };
+		DD5FA7EA27D50DA60086525C /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
+		DD5FA7EC27D50DCF0086525C /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
+		DD5FA7EE27D50E150086525C /* FavoriteListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +125,7 @@
 		DD5FA7B027D396C00086525C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				DD5FA7E727D50D190086525C /* FavoriteList */,
 				DD5FA7B527D3AA280086525C /* Router.swift */,
 				DD5FA7B427D3AA280086525C /* FeatureModule.swift */,
 				DD5FA7D827D492EF0086525C /* NewsDetail */,
@@ -172,6 +181,17 @@
 				DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */,
 			);
 			path = NewsDetail;
+			sourceTree = "<group>";
+		};
+		DD5FA7E727D50D190086525C /* FavoriteList */ = {
+			isa = PBXGroup;
+			children = (
+				DD5FA7E827D50D9B0086525C /* FavoriteListModule.swift */,
+				DD5FA7EA27D50DA60086525C /* FavoriteListViewController.swift */,
+				DD5FA7EC27D50DCF0086525C /* FavoriteListViewModel.swift */,
+				DD5FA7EE27D50E150086525C /* FavoriteListRouter.swift */,
+			);
+			path = FavoriteList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,14 +277,18 @@
 			files = (
 				DD5FA7D527D3BD8D0086525C /* HoleRowConfiguration.swift in Sources */,
 				DD5FA7B627D3AA280086525C /* FeatureModule.swift in Sources */,
+				DD5FA7ED27D50DCF0086525C /* FavoriteListViewModel.swift in Sources */,
 				DD5FA7E027D493840086525C /* NewsDetailRouter.swift in Sources */,
 				DD5FA7B927D3AA3A0086525C /* NewListModule.swift in Sources */,
 				DD5FA7C227D3AEB00086525C /* Loadable.swift in Sources */,
+				DD5FA7E927D50D9B0086525C /* FavoriteListModule.swift in Sources */,
+				DD5FA7EB27D50DA60086525C /* FavoriteListViewController.swift in Sources */,
 				DD5FA7BD27D3AAD70086525C /* NewListViewModel.swift in Sources */,
 				DD5FA7D727D3C0140086525C /* BaseViewModel.swift in Sources */,
 				DD5FA7DA27D493040086525C /* NewsDetailModule.swift in Sources */,
 				DD5FA7BB27D3AABC0086525C /* NewsListViewController.swift in Sources */,
 				DD5FA7E227D4AB6D0086525C /* Date+Extension.swift in Sources */,
+				DD5FA7EF27D50E150086525C /* FavoriteListRouter.swift in Sources */,
 				DD5FA7B727D3AA280086525C /* Router.swift in Sources */,
 				DD5FA7BF27D3AB060086525C /* NewsListRouter.swift in Sources */,
 				DD5FA7DC27D493700086525C /* NewsDetailViewController.swift in Sources */,
