@@ -10,6 +10,10 @@ import UIKit
 import Combine
 import Core
 
+fileprivate struct Constant {
+    static let title = "Favorite List"
+}
+
 fileprivate enum Layout {
     static let rowHeight: CGFloat = 70.0
 }
@@ -49,10 +53,12 @@ class FavoriteListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        viewModel.action(.fetch)
     }
     
     // MARK: - SetupView
     private func setupView() {
+        title = Constant.title
         view.backgroundColor = .white
         view.addSubview(tableView)
         setupConstraint()
