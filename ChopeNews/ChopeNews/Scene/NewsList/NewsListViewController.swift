@@ -92,8 +92,22 @@ extension NewsListViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: UITableViewCell.self), for: indexPath)
         cell.contentConfiguration = viewModel.map(item: values[indexPath.row])
         return cell
-    }  
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let itemType = viewModel.currentNews.value?[indexPath.row] else {
+            return
+        }
+        switch itemType {
+        case let .news(news):
+            viewModel.action(.didSelectNews(indexPath, news))
+        case .hole:
+            break
+        }
+        
+    }
 }
+
 
 fileprivate extension NewsListViewModelProtocol {
     var currentNews: Loadable<[NewsListViewModelState.Item]> {
