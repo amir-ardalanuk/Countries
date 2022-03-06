@@ -36,6 +36,7 @@
 		DD5FA7EB27D50DA60086525C /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7EA27D50DA60086525C /* FavoriteListViewController.swift */; };
 		DD5FA7ED27D50DCF0086525C /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7EC27D50DCF0086525C /* FavoriteListViewModel.swift */; };
 		DD5FA7EF27D50E150086525C /* FavoriteListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7EE27D50E150086525C /* FavoriteListRouter.swift */; };
+		DD5FA7F127D516E90086525C /* NotificationCenter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7F027D516E90086525C /* NotificationCenter+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		DD5FA7EA27D50DA60086525C /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
 		DD5FA7EC27D50DCF0086525C /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
 		DD5FA7EE27D50E150086525C /* FavoriteListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListRouter.swift; sourceTree = "<group>"; };
+		DD5FA7F027D516E90086525C /* NotificationCenter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,9 +127,9 @@
 		DD5FA7B027D396C00086525C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				DD5FA7E727D50D190086525C /* FavoriteList */,
 				DD5FA7B527D3AA280086525C /* Router.swift */,
 				DD5FA7B427D3AA280086525C /* FeatureModule.swift */,
+				DD5FA7E727D50D190086525C /* FavoriteList */,
 				DD5FA7D827D492EF0086525C /* NewsDetail */,
 				DD5FA7CC27D3B5EB0086525C /* CommonUI */,
 				DD5FA7B127D396CC0086525C /* NewsList */,
@@ -152,6 +154,7 @@
 			children = (
 				DD5FA7C127D3AEB00086525C /* Loadable.swift */,
 				DD5FA7E127D4AB6D0086525C /* Date+Extension.swift */,
+				DD5FA7F027D516E90086525C /* NotificationCenter+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				DD5FA7DA27D493040086525C /* NewsDetailModule.swift in Sources */,
 				DD5FA7BB27D3AABC0086525C /* NewsListViewController.swift in Sources */,
 				DD5FA7E227D4AB6D0086525C /* Date+Extension.swift in Sources */,
+				DD5FA7F127D516E90086525C /* NotificationCenter+Extension.swift in Sources */,
 				DD5FA7EF27D50E150086525C /* FavoriteListRouter.swift in Sources */,
 				DD5FA7B727D3AA280086525C /* Router.swift in Sources */,
 				DD5FA7BF27D3AB060086525C /* NewsListRouter.swift in Sources */,

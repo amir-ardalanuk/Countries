@@ -79,7 +79,8 @@ final class NewsDetailViewModel: NewsDetailViewModelProtocol {
         } receiveValue: { [weak self] state in
             guard let self = self else { return }
             self.state.value = self.state.value.update(favState: state)
-        }
+            NotificationCenter.default.post(name: .updateFavorite, object: nil)
+        }.store(in: &cancellables)
 
 
     }

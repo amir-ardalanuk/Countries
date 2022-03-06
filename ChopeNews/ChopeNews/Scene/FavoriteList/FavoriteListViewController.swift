@@ -50,10 +50,15 @@ class FavoriteListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
         viewModel.action(.fetch)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFavoriteList), name: .updateFavorite, object: nil)
     }
     
     // MARK: - SetupView
@@ -74,6 +79,10 @@ class FavoriteListViewController: UIViewController {
         NSLayoutConstraint.activate(tablewViewConstriant)
     }
     
+    // MARK: - Selector
+    @objc private func updateFavoriteList() {
+        viewModel.action(.fetch)
+    }
     // MARK: - bind ViewModel
     private func bind() {
         viewModel.state

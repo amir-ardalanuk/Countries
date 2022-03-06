@@ -9,9 +9,13 @@ import Foundation
 import UIKit
 import Combine
 
+fileprivate struct Constant {
+    static let title = "News"
+}
 fileprivate enum Layout {
     static let rowHeight: CGFloat = 70.0
 }
+
 class NewsListViewController: UIViewController {
     // MARK: - Properties
     private var cancellable = Set<AnyCancellable>()
@@ -52,6 +56,7 @@ class NewsListViewController: UIViewController {
     
     // MARK: - SetupView
     private func setupView() {
+        title = Constant.title
         view.backgroundColor = .white
         view.addSubview(tableView)
         setupConstraint()
