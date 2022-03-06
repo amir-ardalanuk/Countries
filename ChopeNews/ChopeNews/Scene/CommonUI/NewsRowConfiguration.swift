@@ -30,12 +30,6 @@ struct NewsRowConfiguration: UIContentConfiguration {
 class NewsRowView: UIView, UIContentView {
     // MARK: - Views
     private var cancellables = Set<AnyCancellable>()
-    private lazy var dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YY/MM/dd"
-        return dateFormatter
-    }()
-
     private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,7 +143,7 @@ class NewsRowView: UIView, UIContentView {
         logoImageView.image = nil
         guard let newsConfig = newsRowConfiguration else { return }
         titleLabel.text = newsConfig.news.title
-        timeLabel.text = dateFormatter.string(from: newsConfig.news.publishedAt)
+        timeLabel.text = newsConfig.news.publishedAt.shortDateString
         descriptionLabel.text = newsConfig.news.description
         if let urlString = newsConfig.news.image, let url = URL(string: urlString) {
             logoImageView.kf.setImage(with: url)

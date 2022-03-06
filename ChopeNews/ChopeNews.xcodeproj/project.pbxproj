@@ -30,6 +30,7 @@
 		DD5FA7DC27D493700086525C /* NewsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DB27D493700086525C /* NewsDetailViewController.swift */; };
 		DD5FA7DE27D493790086525C /* NewsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DD27D493790086525C /* NewsDetailViewModel.swift */; };
 		DD5FA7E027D493840086525C /* NewsDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */; };
+		DD5FA7E227D4AB6D0086525C /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD5FA7E127D4AB6D0086525C /* Date+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		DD5FA7DB27D493700086525C /* NewsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewController.swift; sourceTree = "<group>"; };
 		DD5FA7DD27D493790086525C /* NewsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailViewModel.swift; sourceTree = "<group>"; };
 		DD5FA7DF27D493840086525C /* NewsDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailRouter.swift; sourceTree = "<group>"; };
+		DD5FA7E127D4AB6D0086525C /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				DD5FA7C127D3AEB00086525C /* Loadable.swift */,
+				DD5FA7E127D4AB6D0086525C /* Date+Extension.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				DD5FA7D727D3C0140086525C /* BaseViewModel.swift in Sources */,
 				DD5FA7DA27D493040086525C /* NewsDetailModule.swift in Sources */,
 				DD5FA7BB27D3AABC0086525C /* NewsListViewController.swift in Sources */,
+				DD5FA7E227D4AB6D0086525C /* Date+Extension.swift in Sources */,
 				DD5FA7B727D3AA280086525C /* Router.swift in Sources */,
 				DD5FA7BF27D3AB060086525C /* NewsListRouter.swift in Sources */,
 				DD5FA7DC27D493700086525C /* NewsDetailViewController.swift in Sources */,
