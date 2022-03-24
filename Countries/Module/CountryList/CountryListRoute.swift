@@ -22,9 +22,7 @@ protocol CountryListRouting: Router {
 final class CountryListRouter: CountryListRouting {
     weak var viewController: UIViewController?
     
-    init(viewController: UIViewController) {
-        self.viewController = viewController
-    }
+    init() {}
     
     func close() {
         viewController?.navigationController?.popViewController(animated: true)

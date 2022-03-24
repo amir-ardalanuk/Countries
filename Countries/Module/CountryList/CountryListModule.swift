@@ -18,12 +18,10 @@ enum CountryListModule: FeatureModule {
     typealias Controller = CountryListViewController
     
     static func makeScene(configuration: Configuration) -> CountryListViewController {
-        let viewController = CountryListViewController()
-        let router = CountryListRouter(viewController: viewController)
+        let router = CountryListRouter()
         let viewModel = CountryListViewModel(configuration: configuration)
-        
-        viewController.viewModel = viewModel
-        viewController.router = router
+        let viewController = CountryListViewController(viewModel: viewModel, router: router)
+        router.viewController = viewController
         
         return viewController
     }

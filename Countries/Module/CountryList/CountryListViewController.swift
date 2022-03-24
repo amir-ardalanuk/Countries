@@ -10,8 +10,8 @@ import Combine
 
 class CountryListViewController: UIViewController {
     //MARK: - Properties
-    var viewModel: CountryListViewModelProtocol!
-    var router: CountryListRouting!
+    var viewModel: any CountryListViewModelProtocol
+    var router: any CountryListRouting
     private var cancellable = Set<AnyCancellable>()
 
     // MARK: - View's
@@ -50,7 +50,9 @@ class CountryListViewController: UIViewController {
     }()
     
     // MARK: - Init
-    init() {
+    init(viewModel: CountryListViewModelProtocol, router: CountryListRouting) {
+        self.viewModel = viewModel
+        self.router = router
         super.init(nibName: nil, bundle: nil)
         title = "Choose Country"
     }
