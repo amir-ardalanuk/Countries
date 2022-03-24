@@ -9,17 +9,17 @@ import UIKit
 import Combine
 import Core
 
-class CountryListViewModel: CountryListViewModelProtocol {
+final class CountryListViewModel: CountryListViewModelProtocol {
     //MARK: - Properties
     private var cancellabe = Set<AnyCancellable>()
     private var countriesCach = [Country]()
     private var countryUsecase: CountryUsecase
-    private var configuration: CountryList.Configuration
+    private let configuration: CountryListModule.Configuration
     var routeAction = PassthroughSubject<CountryListRouteAction, Never>()
     var state: CurrentValueSubject<CountryListState, Never>
     //MARK: - Initialize
     
-    init(configuration: CountryList.Configuration) {
+    init(configuration: CountryListModule.Configuration) {
         self.state = .init(.init(selectedCountries: configuration.selectedCountries, countries: [], isLoading: false))
         self.countryUsecase = configuration.countryUseCase
         self.configuration = configuration
@@ -51,7 +51,7 @@ class CountryListViewModel: CountryListViewModelProtocol {
     }
     
     // MARK: - updating Country List
-    func updateCountryList(_ list: [Country]) {
+    private func updateCountryList(_ list: [Country]) {
         let currentState = state.value
         let viewModels = generateViewModels(list, selectedCountries: state.value.selectedCountries)
         self.state.value = .init(

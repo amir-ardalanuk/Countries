@@ -8,23 +8,19 @@
 import Foundation
 import Core
 
-enum Home {
+enum HomeModule: FeatureModule {
+    
     struct Configuration {
         let countryUseCase: CountryUsecase
     }
-}
-
-class HomeModule: FeatureModule {
-    typealias Controller = HomeViewController
-    typealias Configuration = Home.Configuration
     
-    func makeScene(configuration: Home.Configuration) -> Controller {
-        let viewController = HomeViewController()
+    typealias Controller = HomeViewController
+    
+    static func makeScene(configuration: Configuration) -> Controller {
         let viewModel = HomeViewModel(config: configuration)
-        let router = HomeRouter(viewController: viewController)
+        let router = HomeRouter()
+        let viewController = HomeViewController(viewModel: viewModel, router: router)
         
-        viewController.viewModel = viewModel
-        viewController.router = router
         router.viewController = viewController
         
         return viewController

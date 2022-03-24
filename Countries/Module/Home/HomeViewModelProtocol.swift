@@ -21,7 +21,7 @@ protocol HomeViewModelRoutingAction {
 }
 
 enum HomeRouteAction {
-    case openCountryList(CountryList.Configuration)
+    case openCountryList(CountryListModule.Configuration)
 }
 
 //MARK: - Action

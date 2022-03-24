@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let remoteRepository = RemoteCountryListUsecases(client: httpClient)
         let countryUsecases = RepositoryCountryUsecase(remoteUsecases: remoteRepository)
         /// Prepare viewControllers
-        let homeNavigation = HomeModule().makeScene(configuration: Home.Configuration(countryUseCase: countryUsecases))
+        let homeNavigation = HomeModule.makeScene(configuration: HomeModule.Configuration(countryUseCase: countryUsecases))
         let navigationController = UINavigationController(rootViewController: homeNavigation)
         /// Present
         window.rootViewController = navigationController

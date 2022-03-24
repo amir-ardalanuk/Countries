@@ -11,22 +11,20 @@ import Core
 import Combine
 
 protocol HomeRouting: Router {
-    func openCountryList(configuration: CountryList.Configuration)
+    func openCountryList(configuration: CountryListModule.Configuration)
 }
 
-class HomeRouter: HomeRouting {
+final class HomeRouter: HomeRouting {
     weak var viewController: UIViewController?
     
-    var homeViewController: HomeViewController {
+    private var homeViewController: HomeViewController {
         return viewController as! HomeViewController
     }
     
-    init(viewController: HomeViewController) {
-        self.viewController = viewController
-    }
+    init() {}
     
-    func openCountryList(configuration: CountryList.Configuration) {
-        let countryListViewController = CountryListModule().makeScene(configuration: configuration)
+    func openCountryList(configuration: CountryListModule.Configuration) {
+        let countryListViewController = CountryListModule.makeScene(configuration: configuration)
         countryListViewController.modalPresentationStyle = .fullScreen
         viewController?.navigationController?.pushViewController(countryListViewController, animated: true)
     }

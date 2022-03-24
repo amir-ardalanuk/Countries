@@ -7,20 +7,17 @@
 
 import Foundation
 import Core
-enum CountryList {
+
+enum CountryListModule: FeatureModule {
     struct Configuration {
         let countryUseCase: CountryUsecase
-        var updatedList: ([Country]) -> () 
+        var updatedList: ([Country]) -> ()
         var selectedCountries: [Country]
     }
-}
-
-class CountryListModule: FeatureModule {
     
     typealias Controller = CountryListViewController
-    typealias Configuration = CountryList.Configuration
     
-    func makeScene(configuration: CountryList.Configuration) -> CountryListViewController {
+    static func makeScene(configuration: Configuration) -> CountryListViewController {
         let viewController = CountryListViewController()
         let router = CountryListRouter(viewController: viewController)
         let viewModel = CountryListViewModel(configuration: configuration)
@@ -30,4 +27,5 @@ class CountryListModule: FeatureModule {
         
         return viewController
     }
+
 }

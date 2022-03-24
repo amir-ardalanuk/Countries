@@ -11,5 +11,5 @@ protocol FeatureModule {
     associatedtype Controller
     associatedtype Configuration
 
-    func makeScene(configuration: Configuration) -> Controller
+    static func makeScene(configuration: Configuration) -> Controller
 }

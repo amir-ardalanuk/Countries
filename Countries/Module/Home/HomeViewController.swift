@@ -8,10 +8,10 @@
 import UIKit
 import Combine
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     //MARK: - Properties
-    var viewModel: HomeViewModelProtocol!
-    var router: HomeRouting!
+    let viewModel: any HomeViewModelProtocol
+    let router: any HomeRouting
     private var cancellable = Set<AnyCancellable>()
     
     // MARK: - Views
@@ -47,7 +47,9 @@ class HomeViewController: UIViewController {
     }()
     
     // MARK: - Init
-    init() {
+    init(viewModel: HomeViewModelProtocol, router: HomeRouting) {
+        self.viewModel = viewModel
+        self.router = router
         super.init(nibName: nil, bundle: nil)
         self.title = "Selected Country"
     }
@@ -71,7 +73,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - setup Views
     
-    func setupViews() {
+    private func setupViews() {
         view.backgroundColor = .white
         [tableView, chooseCountryButton, emptyListLabel]
             .forEach(view.addSubview(_:))
@@ -79,7 +81,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - setup Constraint
     
-    func setupConstraint() {
+    private func setupConstraint() {
         let emptyListLabelConstraint = [
             emptyListLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             emptyListLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor)
@@ -105,7 +107,7 @@ class HomeViewController: UIViewController {
     
     //MARK: - bind viewModel
     
-    func bindViewModel() {
+    private func bindViewModel() {
         viewModel.state
             .map {
                 !$0.selectedCountry.isEmpty

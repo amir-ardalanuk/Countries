@@ -18,7 +18,7 @@ class HomeViewModel: HomeViewModelProtocol {
     var state: CurrentValueSubject<HomeState, Never> = .init(.init(selectedCountry: []))
     
     
-    init(config: Home.Configuration) {
+    init(config: HomeModule.Configuration) {
         self.countryUsecase = config.countryUseCase
     }
     
@@ -28,7 +28,7 @@ class HomeViewModel: HomeViewModelProtocol {
     
     // MARK: - Handel Receive Actions
     private func openCountryList() {
-        let config = CountryList.Configuration(countryUseCase: countryUsecase, updatedList: { [weak self] updatedList in
+        let config = CountryListModule.Configuration(countryUseCase: countryUsecase, updatedList: { [weak self] updatedList in
             self?.handel(action: .updateList(updatedList))
         }, selectedCountries: state.value.selectedCountry.map(\.country))
         routeAction.send(.openCountryList(config))

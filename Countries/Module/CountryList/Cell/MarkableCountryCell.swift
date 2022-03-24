@@ -34,10 +34,10 @@ class MarkableCountryCell: UITableViewCell {
     
     //MARK: - setup Views Data
     func setupViewData() {
-        self.viewModel.flatMap {
-            self.nameLabel.text = $0.country.name
-            self.flagLabel.text = $0.country.flag
-            self.checkmarkImageView.image = $0.isSelected ? #imageLiteral(resourceName: "ic_circle_mark") : #imageLiteral(resourceName: "ic_circle")
+        viewModel.flatMap {
+            nameLabel.text = $0.country.name
+            flagLabel.text = $0.country.flag
+            checkmarkImageView.image = $0.isSelected ? #imageLiteral(resourceName: "ic_circle_mark") : #imageLiteral(resourceName: "ic_circle")
         }
     }
 }
