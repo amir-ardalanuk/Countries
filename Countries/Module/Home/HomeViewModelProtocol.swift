@@ -20,7 +20,7 @@ protocol HomeViewModelRoutingAction {
     var routeAction: PassthroughSubject<HomeRouteAction, Never> { get set }
 }
 
-enum HomeRouteAction {
+enum HomeRouteAction: Equatable {
     case openCountryList(CountryListModule.Configuration)
 }
 

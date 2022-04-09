@@ -9,7 +9,11 @@ import Foundation
 import Core
 
 enum CountryListModule: FeatureModule {
-    struct Configuration {
+    struct Configuration: Equatable {
+        static func == (lhs: CountryListModule.Configuration, rhs: CountryListModule.Configuration) -> Bool {
+            lhs.selectedCountries.elementsEqual(rhs.selectedCountries)
+        }
+        
         let countryUseCase: CountryUsecase
         var updatedList: ([Country]) -> ()
         var selectedCountries: [Country]
