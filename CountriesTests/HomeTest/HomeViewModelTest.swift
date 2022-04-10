@@ -31,16 +31,28 @@ class HomeViewModelSpec: QuickSpec {
             }
             
             context("When user have not countries") {
-                it("user click On Add button") {
-                    sut.handel(action: .openCountryList)
+                it("user click On Add button route to open country") {
+                    var value: HomeRouteAction?
+                    
+                    sut.routeAction.sink { action in
+                        value = action
+                    }.store(in: &cancellables)
                     
                     let action: HomeRouteAction = .openCountryList(config)
-//                    waitUntil { done in
-//                        sut.routeAction.sink { value in
-//                            expect(value).to(equal(action))
-//                            done()
-//                        }.store(in: &cancellables)
-//                    }
+                    sut.handel(action: .openCountryList)
+                    expect(value).toEventually(equal(action))
+                }
+                
+                it("when updating list state should updated with new coutties") {
+                    let mockCountry: Country = .stub(id: "TEST")
+                    sut.routeAction.sink { action in
+                        switch action {
+                        case let .openCountryList(config):
+                            config.updatedList([mockCountry])
+                        }
+                    }.store(in: &cancellables)
+                    sut.handel(action: .openCountryList)
+                    expect(sut.state.value.selectedCountry.map { $0.country} ).toEventually(equal([mockCountry]))
                 }
             }
             
