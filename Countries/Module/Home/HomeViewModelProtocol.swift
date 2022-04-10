@@ -10,6 +10,7 @@ import Core
 import Combine
 
 //MARK: - Base Protocol
+//sourcery: AutoMockable
 protocol HomeViewModelProtocol: HomeViewModelRoutingAction {
     func handel(action: HomeAction)
     var state: CurrentValueSubject<HomeState, Never> { get }

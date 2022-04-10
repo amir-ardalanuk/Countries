@@ -39,6 +39,7 @@
 		DDC5BF6B2801BFE600AE2163 /* HomeViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDC5BF6A2801BFE600AE2163 /* HomeViewModelTest.swift */; };
 		DDC5BF6E2801C31E00AE2163 /* Quick in Frameworks */ = {isa = PBXBuildFile; productRef = DDC5BF6D2801C31E00AE2163 /* Quick */; };
 		DDC5BF712801C35A00AE2163 /* Nimble in Frameworks */ = {isa = PBXBuildFile; productRef = DDC5BF702801C35A00AE2163 /* Nimble */; };
+		DDC5BF7628030F1E00AE2163 /* SwiftyMocky in Frameworks */ = {isa = PBXBuildFile; productRef = DDC5BF7528030F1E00AE2163 /* SwiftyMocky */; };
 		DDFDD5EF27CBD65D005A9A4E /* HomeViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFDD5EE27CBD65D005A9A4E /* HomeViewModelProtocol.swift */; };
 		DDFDD5F627CBD8BC005A9A4E /* CountryListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDFDD5F527CBD8BC005A9A4E /* CountryListViewModelProtocol.swift */; };
 /* End PBXBuildFile section */
@@ -112,6 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DDC5BF6E2801C31E00AE2163 /* Quick in Frameworks */,
+				DDC5BF7628030F1E00AE2163 /* SwiftyMocky in Frameworks */,
 				DDC5BF712801C35A00AE2163 /* Nimble in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +345,7 @@
 			packageProductDependencies = (
 				DDC5BF6D2801C31E00AE2163 /* Quick */,
 				DDC5BF702801C35A00AE2163 /* Nimble */,
+				DDC5BF7528030F1E00AE2163 /* SwiftyMocky */,
 			);
 			productName = CountriesTests;
 			productReference = 8BCB97F527A533E900D1346D /* CountriesTests.xctest */;
@@ -401,6 +404,7 @@
 			packageReferences = (
 				DDC5BF6C2801C31E00AE2163 /* XCRemoteSwiftPackageReference "Quick" */,
 				DDC5BF6F2801C35A00AE2163 /* XCRemoteSwiftPackageReference "Nimble" */,
+				DDC5BF7428030F1E00AE2163 /* XCRemoteSwiftPackageReference "SwiftyMocky" */,
 			);
 			productRefGroup = 8BCB97E027A533E700D1346D /* Products */;
 			projectDirPath = "";
@@ -814,6 +818,14 @@
 				kind = branch;
 			};
 		};
+		DDC5BF7428030F1E00AE2163 /* XCRemoteSwiftPackageReference "SwiftyMocky" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MakeAWishFoundation/SwiftyMocky";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -842,6 +854,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DDC5BF6F2801C35A00AE2163 /* XCRemoteSwiftPackageReference "Nimble" */;
 			productName = Nimble;
+		};
+		DDC5BF7528030F1E00AE2163 /* SwiftyMocky */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDC5BF7428030F1E00AE2163 /* XCRemoteSwiftPackageReference "SwiftyMocky" */;
+			productName = SwiftyMocky;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
